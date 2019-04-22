@@ -1,9 +1,13 @@
-const path = require('path');
-const webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function(env, argv) {
-	const configuration = {
+interface ProcessEnv {
+	[key: string]: string | undefined;
+}
+
+function getWebPackConfiguration(env: ProcessEnv, argv: []): webpack.Configuration {
+	const configuration: webpack.Configuration = {
 		mode: 'development', // "production" | "development" | "none"
 		entry: {
 			app: ['./src/app/index.tsx', 'webpack-hot-middleware/client'],
@@ -35,14 +39,16 @@ module.exports = function(env, argv) {
 
 	// server-specific configuration
 	if (env.platform === 'server') {
-		base.target = 'node';
+		configuration.target = 'node';
 	}
 
 	// client-specific configurations
 	if (env.platform === 'web') {
-		base.entry = './src/app.tsx';
-		base.output.filename = 'js/client.js';
+		configuration.entry = './src/app.tsx';
+		configuration.output = { ...configuration.output, filename: 'js/client.js' };
 	}
 
 	return configuration;
-};
+}
+
+export default getWebPackConfiguration;
