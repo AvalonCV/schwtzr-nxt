@@ -15,6 +15,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { App } from './../app/App';
 
+// Or use 'webpack.compilation.Asset' ?
 type Assets = string | [] | {};
 
 // This function makes server rendering of asset references consistent with different webpack chunk/entry configurations
