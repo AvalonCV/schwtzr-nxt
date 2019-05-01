@@ -1,6 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-// import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // // type Modify<T, R> = Pick<T, Exclude<keyof T, keyof R>> & R;
 // // type MyWebpackConfiguration = Modify<
@@ -56,11 +55,7 @@ export default function(_env: NodeJS.ProcessEnv & ConfigurationOptions, _argv: a
 				}
 			]
 		},
-		plugins: [
-			// new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'app', 'index.html') }),
-			// new HtmlWebpackPlugin(),
-			new webpack.HotModuleReplacementPlugin()
-		]
+		plugins: [new webpack.HotModuleReplacementPlugin()]
 	};
 
 	return [
