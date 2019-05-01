@@ -1,27 +1,10 @@
-import path from 'path';
-import webpack from 'webpack';
-// import HtmlWebpackPlugin from 'html-webpack-plugin';
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// // type Modify<T, R> = Pick<T, Exclude<keyof T, keyof R>> & R;
-// // type MyWebpackConfiguration = Modify<
-// // 	webpack.Configuration,
-// // 	{
-// // 		output: webpack.Output;
-// // 		module: webpack.Module;
-// // 	}
-// // >;
-interface CustomWebpackConfiguration extends webpack.Configuration {
-	output: webpack.Output;
-	module: webpack.Module;
-}
-
-export interface ConfigurationOptions {
-	platform: 'server' | 'web';
-}
-
-export default function(_env: NodeJS.ProcessEnv & ConfigurationOptions, _argv: any): CustomWebpackConfiguration[] {
+module.exports = function(env, argv) {
 	// default to the server configuration
-	const base: CustomWebpackConfiguration = {
+	const base = {
 		mode: 'development',
 		output: {
 			filename: 'js/server.js',
@@ -58,28 +41,28 @@ export default function(_env: NodeJS.ProcessEnv & ConfigurationOptions, _argv: a
 		},
 		plugins: [
 			// new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'app', 'index.html') }),
-			// new HtmlWebpackPlugin(),
+			new HtmlWebpackPlugin(),
 			new webpack.HotModuleReplacementPlugin()
 		]
 	};
 
-	return [
+	if (env.platform === 'server') {
 		// server-specific configuration
-		{
+		return {
 			...base,
-			name: 'server',
 			entry: './src/server/index.ts',
 			target: 'node'
-		},
-		{
+		};
+	} else if (env.platform === 'web') {
+		// client-specific configurations
+		return {
 			...base,
-			name: 'client',
-			entry: ['webpack-hot-middleware/client', './src/app/index.tsx'],
+			entry: './src/app/index.tsx',
 			target: 'web',
 			output: {
 				...base.output,
 				filename: 'js/client.js'
 			}
-		}
-	];
-}
+		};
+	}
+};
