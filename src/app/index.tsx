@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { App } from './App';
+import { createRenderer } from 'fela';
 
-declare let module: any;
+import { App } from './App';
+import { rehydrate } from 'fela-dom';
+
+const rela_renderer = createRenderer();
+// check if this is client-side rendering (ME: should not be necessary in this file!)
+if (typeof window !== 'undefined' && window.document && window.document.createElement) {
+	rehydrate(rela_renderer);
+}
+
+ReactDOM.hydrate(<App fela_renderer={rela_renderer} />, document.getElementById('root'));
+
 if (module.hot) {
 	module.hot.accept();
 }
-
-let react_root = document.getElementById('root');
-if (react_root === null) {
-	react_root = document.createElement('div');
-	document.body.appendChild(react_root);
-}
-
-ReactDOM.hydrate(<App />, react_root);
