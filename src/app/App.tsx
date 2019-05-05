@@ -3,7 +3,7 @@ import React from 'react';
 import { IRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 
-import { MainLayout } from './Components/Layout/MainLayout';
+import { MainLayout } from './components/layout/MainLayout';
 
 interface AppProps {
 	fela_renderer: IRenderer;

@@ -40,6 +40,15 @@ export default function(_env: NodeJS.ProcessEnv, _argv: any): CustomWebpackConfi
 						}
 					]
 				},
+				{
+					test: /\.(gif|jpeg|jpg|png|svg)$/,
+					use: [
+						{
+							loader: 'image-size-loader',
+							options: { context: path.resolve(__dirname, 'src') }
+						}
+					]
+				},
 				// https://github.com/kangax/html-minifier/issues/727
 				{
 					test: [

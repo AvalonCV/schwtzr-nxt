@@ -14,6 +14,7 @@
 		"noUnusedParameters": true,
 		"outDir": "./dist/",
 		"preserveConstEnums": true,
+		"pretty": true,
 		"removeComments": true,
 		"sourceMap": true,
 		/* Strict Type-Checking Options */
