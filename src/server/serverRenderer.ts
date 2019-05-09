@@ -39,7 +39,7 @@ const getWebpackScriptAssets = (res: Response) => {
 		.forEach(element => {
 			for (let asset in element.compilation.assets) {
 				normalizeAssets(asset).forEach(value => {
-					value.endsWith('js') && assets.push(value);
+					value.endsWith('.js') && assets.push(value);
 				});
 			}
 		});
@@ -64,7 +64,6 @@ export default function serverRenderer() {
 				<meta name="theme-color" content="#000000">
 
 				<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=latin-ext" rel="stylesheet" />
-				<link href="https://use.fontawesome.com/releases/v5.8.1/css/svg-with-js.css" rel="stylesheet"></link>
 				${renderToMarkup(fela_renderer)}
 				<title>Test</title>
 			</head>

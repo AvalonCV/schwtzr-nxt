@@ -1,6 +1,22 @@
 export const corecss = `
 
 
+@font-face {
+	font-family: 'Font Awesome 5 Free';
+	font-style: normal;
+	font-weight: 900;
+	font-display: auto;
+	src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: 'Font Awesome 5 Free';
+	font-style: normal;
+	font-weight: 400;
+	font-display: auto;
+	src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-regular-400.woff2") format("woff2");
+}
+
 html {
 	font-family: 'Open Sans', sans-serif;
 	/* should lead to a height of '24px', as the default font-size is '16px' */

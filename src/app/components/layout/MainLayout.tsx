@@ -3,8 +3,7 @@ import { FelaComponent } from 'react-fela';
 import { IStyle } from 'fela';
 import { NestedStyle } from '../../styles/fela';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '../elements/fontAwesomeIcon';
 
 import { DrawPicture } from '../elements/Image';
 import logo from './../../images/schweitzer_logo_white.svg';
@@ -68,12 +67,12 @@ const footer_styles: IStyle = {
 };
 
 const footer_service_elements = [
-	{ icon: faGlobeEurope, name: 'WebShop' },
-	{ icon: faGlobeEurope, name: 'Connect' },
-	{ icon: faGlobeEurope, name: 'Intranet' },
-	{ icon: faGlobeEurope, name: 'Schweitzer Mediencen' },
-	{ icon: faGlobeEurope, name: 'Neuerscheinungsdienste' },
-	{ icon: faGlobeEurope, name: 'App für iOS' }
+	{ icon: 'faGlobeEurope', name: 'WebShop' },
+	{ icon: 'faGlobeEurope', name: 'Connect' },
+	{ icon: 'faGlobeEurope', name: 'Intranet' },
+	{ icon: 'faGlobeEurope', name: 'Schweitzer Mediencenter' },
+	{ icon: 'faGlobeEurope', name: 'Neuerscheinungsdienste' },
+	{ icon: 'faGlobeEurope', name: 'App für iOS' }
 ];
 
 const footer_service_element_styles: NestedStyle = {
@@ -90,7 +89,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 						{header_menu_items.map((element, index) => {
 							return (
 								<FelaComponent as="li" key={index} style={header_menu_list_item_styles}>
-									<FontAwesomeIcon icon={faEdit} />
+									<FontAwesomeIcon icon="edit" />
 									{element}
 								</FelaComponent>
 							);
@@ -109,7 +108,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 				<ol>
 					{footer_service_elements.map((element, index) => (
 						<FelaComponent key={index} as="li" style={footer_service_element_styles}>
-							<FontAwesomeIcon icon={element.icon} />
+							<FontAwesomeIcon icon="globe-europe" />
 							{element.name}
 						</FelaComponent>
 					))}
