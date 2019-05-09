@@ -13,6 +13,9 @@ import { corecss } from './../shared/css/core.css';
 
 // Or use 'webpack.compilation.Asset' ?
 type Assets = string | [] | {};
+interface CompilationWithName extends webpack.compilation.Compilation {
+	name?: string;
+}
 
 // This function makes server rendering of asset references consistent with different webpack chunk/entry configurations
 // https://github.com/webpack/webpack-dev-middleware#server-side-rendering
@@ -25,15 +28,23 @@ const normalizeAssets: (assets: Assets) => string[] = (assets: Assets) => {
 };
 
 const getWebpackScriptAssets = (res: Response) => {
-	const webpackStats: webpack.Stats = res.locals.webpackStats;
-	const assetsByChunkName: { main: Assets } = webpackStats
-		.toJson()
-		.children.filter((config: { name: string }) => config.name === 'client')[0].assetsByChunkName;
+	const assets: string[] = [];
+	const webpackStats: webpack.Stats[] = res.locals.webpackStats.stats;
 
-	return normalizeAssets(assetsByChunkName.main)
-		.filter(path => path.endsWith('.js'))
-		.map(path => `<script type="text/javascript" src="${path}" defer></script>`)
-		.join('\n');
+	webpackStats
+		.filter(element => {
+			const { compilation }: { compilation: CompilationWithName } = element;
+			return compilation.name === 'client';
+		})
+		.forEach(element => {
+			for (let asset in element.compilation.assets) {
+				normalizeAssets(asset).forEach(value => {
+					value.endsWith('js') && assets.push(value);
+				});
+			}
+		});
+
+	return assets.map(path => `<script type="text/javascript" src="${path}" defer></script>`).join('\n');
 };
 
 export default function serverRenderer() {
