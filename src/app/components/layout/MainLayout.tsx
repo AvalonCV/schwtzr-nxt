@@ -3,7 +3,7 @@ import { FelaComponent } from 'react-fela';
 import { IStyle } from 'fela';
 import { NestedStyle } from '../../styles/fela';
 
-import { FontAwesomeIcon } from '../elements/fontAwesomeIcon';
+import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
 import { DrawPicture } from '../elements/Image';
 import logo from './../../images/schweitzer_logo_white.svg';
@@ -66,13 +66,29 @@ const footer_styles: IStyle = {
 	borderTopLeftRadius: '40px'
 };
 
-const footer_service_elements = [
-	{ icon: 'faGlobeEurope', name: 'WebShop' },
-	{ icon: 'faGlobeEurope', name: 'Connect' },
-	{ icon: 'faGlobeEurope', name: 'Intranet' },
-	{ icon: 'faGlobeEurope', name: 'Schweitzer Mediencenter' },
-	{ icon: 'faGlobeEurope', name: 'Neuerscheinungsdienste' },
-	{ icon: 'faGlobeEurope', name: 'App für iOS' }
+interface NavigationElements {
+	icon?: FontAwesomeIcon | FontAwesomeIconName;
+	name: string;
+	description?: string;
+}
+
+const footer_feature_elements: NavigationElements[] = [
+	{ name: 'Top Auswahl', icon: 'cubes' },
+	{ name: 'Umfangreiche Beratung', icon: 'graduation-cap' },
+	{ name: 'Persöhnliche Fachberatung', icon: 'comment' },
+	{ name: 'Nachhaltigkeit', icon: 'leaf' },
+	{ name: 'Schnelle Lieferung', icon: 'truck' },
+	{ name: 'Versandkostenfrei', icon: 'thumbs-up' },
+	{ name: 'Sicher bezahlen', icon: 'credit-card' }
+];
+
+const footer_service_elements: NavigationElements[] = [
+	{ name: 'WebShop' },
+	{ name: 'Connect' },
+	{ name: 'Intranet' },
+	{ name: 'Schweitzer Mediencenter' },
+	{ name: 'Neuerscheinungsdienste' },
+	{ name: 'App für iOS' }
 ];
 
 const footer_service_element_styles: NestedStyle = {
@@ -89,7 +105,6 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 						{header_menu_items.map((element, index) => {
 							return (
 								<FelaComponent as="li" key={index} style={header_menu_list_item_styles}>
-									<FontAwesomeIcon icon="edit" />
 									{element}
 								</FelaComponent>
 							);
@@ -104,11 +119,21 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			</FelaComponent>,
 			<FelaComponent key="footer" as="footer" style={footer_styles}>
 				<DrawPicture image={logo} />
+
+				<ol>
+					{footer_feature_elements.map((element, index) => (
+						<FelaComponent key={index} as="li" style={footer_service_element_styles}>
+							{element.icon && <FontAwesomeIcon icon={element.icon} />}
+							{element.name}
+						</FelaComponent>
+					))}
+				</ol>
+
 				<h3>Services</h3>
 				<ol>
 					{footer_service_elements.map((element, index) => (
 						<FelaComponent key={index} as="li" style={footer_service_element_styles}>
-							<FontAwesomeIcon icon="globe-europe" />
+							{element.icon && <FontAwesomeIcon icon={element.icon} />}
 							{element.name}
 						</FelaComponent>
 					))}

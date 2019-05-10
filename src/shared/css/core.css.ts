@@ -18,7 +18,7 @@ export const corecss = `
 }
 
 html {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	/* should lead to a height of '24px', as the default font-size is '16px' */
 	font-size: calc(14px + (100vw / 960));
 }

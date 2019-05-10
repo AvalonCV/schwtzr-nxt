@@ -1,9 +1,16 @@
 import React from 'react';
 
-import { IconName } from '@fortawesome/fontawesome-common-types';
-
 import { FelaComponent } from 'react-fela';
 import { NestedStyle } from '../../styles/fela';
+
+import fontAwesomeIconCollection from './fontAwesomeIcons.json';
+type FontAwesomeIconCollection = typeof fontAwesomeIconCollection;
+export type FontAwesomeIconName = keyof FontAwesomeIconCollection;
+export type FontAwesomeIconType = 'solid' | 'regular' | 'light' | 'brands';
+export interface FontAwesomeIcon {
+	type?: FontAwesomeIconType;
+	icon: FontAwesomeIconName;
+}
 
 const FontAwesomeFontFamilies = {
 	solid: {
@@ -24,21 +31,19 @@ const FontAwesomeFontFamilies = {
 	}
 };
 
-const FontAwesomeIcons: { [key: string]: string } = {
-	'globe-europe': '\\f7a2',
-	edit: '\\f044'
-};
-
-type FontAwesomeIconType = 'solid' | 'regular' | 'light' | 'brands';
-
 interface FontAwesomeIconProps {
 	type?: FontAwesomeIconType;
-	icon: IconName;
+	icon: FontAwesomeIcon | FontAwesomeIconName;
 	additional_styles?: NestedStyle;
 }
 
-const getFontAwesomeIconStyles: ({  }: FontAwesomeIconProps & { type: FontAwesomeIconType }) => NestedStyle = (
-	props: FontAwesomeIconProps & { type: FontAwesomeIconType }
+interface getFontAwesomeIconStyleProps extends FontAwesomeIconProps {
+	type: FontAwesomeIconType;
+	icon: FontAwesomeIconName;
+}
+
+const getFontAwesomeIconStyles: ({  }: getFontAwesomeIconStyleProps) => NestedStyle = (
+	props: getFontAwesomeIconStyleProps
 ) => {
 	return {
 		display: 'inline-block',
@@ -50,11 +55,27 @@ const getFontAwesomeIconStyles: ({  }: FontAwesomeIconProps & { type: FontAwesom
 			textRendering: 'auto',
 			fontFamily: FontAwesomeFontFamilies[props.type].fontFamily,
 			fontWeight: FontAwesomeFontFamilies[props.type].fontWeight,
-			content: `"${FontAwesomeIcons[props.icon]}"`
+			content: `"\\${fontAwesomeIconCollection[props.icon]}"`
 		}
 	};
 };
 
 export const FontAwesomeIcon: React.StatelessComponent<FontAwesomeIconProps> = (props: FontAwesomeIconProps) => {
-	return <FelaComponent as="i" style={getFontAwesomeIconStyles({ ...props, type: props.type || 'solid' })} />;
+	let { icon, type, ...rest } = props;
+	if (typeof icon === 'object') {
+		type = type || icon.type;
+		icon = icon.icon;
+	} else {
+	}
+
+	return (
+		<FelaComponent
+			as="i"
+			style={getFontAwesomeIconStyles({
+				...rest,
+				icon: icon,
+				type: type || 'solid'
+			})}
+		/>
+	);
 };

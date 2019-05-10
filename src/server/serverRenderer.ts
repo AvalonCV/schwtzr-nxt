@@ -63,7 +63,7 @@ export default function serverRenderer() {
 				<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 				<meta name="theme-color" content="#000000">
 
-				<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=latin-ext" rel="stylesheet" />
+				<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&amp;subset=latin-ext" rel="stylesheet">
 				${renderToMarkup(fela_renderer)}
 				<title>Test</title>
 			</head>
