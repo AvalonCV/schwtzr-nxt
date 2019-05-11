@@ -55,15 +55,18 @@ const header_menu_list_item_styles: IStyle = {
 	display: 'inline-block'
 };
 
-const footer_styles: IStyle = {
-	maxWidth: '1280px',
-	margin: '40px auto 0',
+const footer_styles: NestedStyle = {
+	marginTop: '40px',
 	backgroundColor: '#1d3c8d',
 	color: 'white',
 	minHeight: '480px',
 	boxSizing: 'border-box',
 	padding: '1em 1em 1em 40px',
-	borderTopLeftRadius: '40px'
+	borderTopLeftRadius: '40px',
+	'@media (min-width: 1280px)': {
+		marginLeft: 'calc((100% - 1280px) / 2)',
+		paddingRight: 'calc((100% - 1280px) / 2 + 1em)'
+	}
 };
 
 interface NavigationElements {
@@ -122,7 +125,11 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 
 				<ol>
 					{footer_feature_elements.map((element, index) => (
-						<FelaComponent key={index} as="li" style={footer_service_element_styles}>
+						<FelaComponent
+							key={index}
+							as="li"
+							style={{ ...footer_service_element_styles, color: 'orange' }}
+						>
 							{element.icon && <FontAwesomeIcon icon={element.icon} />}
 							{element.name}
 						</FelaComponent>

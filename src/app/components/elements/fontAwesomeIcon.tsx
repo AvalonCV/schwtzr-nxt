@@ -49,7 +49,7 @@ const getFontAwesomeIconStyles: ({  }: getFontAwesomeIconStyleProps) => NestedSt
 		display: 'inline-block',
 		lineHeight: 1,
 		...props.additional_styles,
-		':before': {
+		'::before': {
 			fontStyle: 'normal',
 			fontVariant: 'normal',
 			textRendering: 'auto',
