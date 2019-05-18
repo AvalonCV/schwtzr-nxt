@@ -27,6 +27,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 		// Enable sourcemaps for debugging webpack's output.
 		devtool: is_production ? 'source-map' : 'cheap-module-eval-source-map',
 		output: {
+			// path needs to be an ABSOLUTE file path
+			path: path.resolve(process.cwd(), 'dist'),
 			publicPath: is_production ? '/public/' : '/'
 		},
 		resolve: {
@@ -48,8 +50,12 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{
-							loader: 'image-size-loader?',
-							options: { context: path.resolve(__dirname, 'src') }
+							loader: 'image-size-loader',
+							options: {
+								context: path.resolve(__dirname, 'src'),
+								outputPath: 'images',
+								name: 'images/[name].[hash].[ext]'
+							}
 						}
 					]
 				},
@@ -75,9 +81,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			target: 'node',
 			output: {
 				...base.output,
-				// path needs to be an ABSOLUTE file path
-				path: path.resolve(process.cwd(), 'dist/server'),
-				filename: 'js/server.js',
+				filename: 'server/js/server.js',
 				libraryTarget: 'commonjs2'
 			}
 		},
@@ -89,9 +93,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			target: 'web',
 			output: {
 				...base.output,
-				// path needs to be an ABSOLUTE file path
-				path: path.resolve(process.cwd(), 'dist/client'),
-				filename: 'js/client.js'
+				filename: 'client/js/client.js'
 			},
 			plugins: is_production ? base.plugins : [...base.plugins, new webpack.HotModuleReplacementPlugin()]
 		}

@@ -55,45 +55,52 @@ const getWebpackScriptAssets = (res: Response) => {
 };
 
 export default function serverRenderer() {
-	return function(_req: Request, res: Response, _next: any) {
-		const fela_renderer = createRenderer();
-		fela_renderer.renderStatic(normalizecss + ' ' + corecss);
+	return function(req: Request, res: Response, _next: any) {
+		switch (req.path) {
+			case '/':
+				const fela_renderer = createRenderer();
+				fela_renderer.renderStatic(normalizecss + ' ' + corecss);
 
-		const body = ReactDOMServer.renderToString(React.createElement(App, { fela_renderer: fela_renderer }));
+				const body = ReactDOMServer.renderToString(React.createElement(App, { fela_renderer: fela_renderer }));
 
-		const response = `
-			<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="utf-8">
-				<meta http-equiv="X-UA-Compatible" content="IE=edge">
-				<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-				<meta name="theme-color" content="#000000">
+				const response = `
+					<!DOCTYPE html>
+					<html lang="en">
+					<head>
+						<meta charset="utf-8">
+						<meta http-equiv="X-UA-Compatible" content="IE=edge">
+						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+						<meta name="theme-color" content="#000000">
 
-				<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&amp;subset=latin-ext" rel="stylesheet">
-				${renderToMarkup(fela_renderer)}
-				<title>Test</title>
-			</head>
-			<body>
-				<div class="main_root" id="root">${body}</div>
-				${getWebpackScriptAssets(res)}
-			</body>
-			</html>
-		`;
-		// res.status(200).send(response);
-		res.status(200).send(
-			minify(response, {
-				collapseWhitespace: true,
-				minifyCSS: {
-					/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
-					compatibility: {
-						properties: {
-							colors: false,
-							merging: false
+						<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&amp;subset=latin-ext" rel="stylesheet">
+						${renderToMarkup(fela_renderer)}
+						<title>Test</title>
+					</head>
+					<body>
+						<div class="main_root" id="root">${body}</div>
+						${getWebpackScriptAssets(res)}
+					</body>
+					</html>
+				`;
+				// res.status(200).send(response);
+				res.status(200).send(
+					minify(response, {
+						collapseWhitespace: true,
+						minifyCSS: {
+							/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
+							compatibility: {
+								properties: {
+									colors: false,
+									merging: false
+								}
+							}
 						}
-					}
-				}
-			})
-		);
+					})
+				);
+				break;
+
+			default:
+				res.status(404).send();
+		}
 	};
 }

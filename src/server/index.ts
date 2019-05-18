@@ -24,6 +24,7 @@ if (is_production) {
 	// do not import serverRenderer sync in here! It (currently) breaks 'npm run dev-server' (images cannot be resolved)
 	import('./serverRenderer').then(serverRenderer => {
 		app.use(compression());
+		app.use(public_path + 'images/', express.static('dist/images'));
 		app.use(public_path, express.static('dist/client'));
 		app.use('/', serverRenderer.default());
 		app.listen(port, () => {
