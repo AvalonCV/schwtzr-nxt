@@ -11,6 +11,8 @@ import { renderToMarkup } from 'fela-dom';
 import { normalizecss } from './../shared/css/normalize.css';
 import { corecss } from './../shared/css/core.css';
 
+const is_production = process.env.NODE_ENV === 'production';
+
 // Or use 'webpack.compilation.Asset' ?
 type Assets = string | [] | {};
 interface CompilationWithName extends webpack.compilation.Compilation {
@@ -29,20 +31,25 @@ const normalizeAssets: (assets: Assets) => string[] = (assets: Assets) => {
 
 const getWebpackScriptAssets = (res: Response) => {
 	const assets: string[] = [];
-	const webpackStats: webpack.Stats[] = res.locals.webpackStats.stats;
 
-	webpackStats
-		.filter(element => {
-			const { compilation }: { compilation: CompilationWithName } = element;
-			return compilation.name === 'client';
-		})
-		.forEach(element => {
-			for (let asset in element.compilation.assets) {
-				normalizeAssets(asset).forEach(value => {
-					value.endsWith('.js') && assets.push(value);
-				});
-			}
-		});
+	if (is_production) {
+		assets.push('/public/js/client.js');
+	} else {
+		const webpackStats: webpack.Stats[] = res.locals.webpackStats.stats;
+
+		webpackStats
+			.filter(element => {
+				const { compilation }: { compilation: CompilationWithName } = element;
+				return compilation.name === 'client';
+			})
+			.forEach(element => {
+				for (let asset in element.compilation.assets) {
+					normalizeAssets(asset).forEach(value => {
+						value.endsWith('.js') && assets.push(value);
+					});
+				}
+			});
+	}
 
 	return assets.map(path => `<script type="text/javascript" src="${path}" defer></script>`).join('\n');
 };

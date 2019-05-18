@@ -15,15 +15,19 @@ interface CustomWebpackConfiguration extends webpack.Configuration {
 	plugins: webpack.Plugin[];
 }
 
-export default function(_env: NodeJS.ProcessEnv, _argv: any): CustomWebpackConfiguration[] {
+interface CustomProcessEnv extends NodeJS.ProcessEnv {
+	NODE_ENV?: 'development' | 'production' | 'none';
+}
+
+export default function(env: CustomProcessEnv = process.env, _argv: any): CustomWebpackConfiguration[] {
+	const is_production = env.NODE_ENV === 'production';
+
 	const base: CustomWebpackConfiguration = {
-		mode: 'development',
+		mode: is_production ? 'production' : 'development',
 		// Enable sourcemaps for debugging webpack's output.
-		devtool: 'cheap-module-eval-source-map',
+		devtool: is_production ? 'source-map' : 'cheap-module-eval-source-map',
 		output: {
-			// path needs to be an ABSOLUTE file path
-			path: path.resolve(process.cwd(), 'dist'),
-			publicPath: '/'
+			publicPath: is_production ? '/public/' : '/'
 		},
 		resolve: {
 			// Add '.ts' and '.tsx' as resolvable extensions.
@@ -44,7 +48,7 @@ export default function(_env: NodeJS.ProcessEnv, _argv: any): CustomWebpackConfi
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{
-							loader: 'image-size-loader',
+							loader: 'image-size-loader?',
 							options: { context: path.resolve(__dirname, 'src') }
 						}
 					]
@@ -63,28 +67,33 @@ export default function(_env: NodeJS.ProcessEnv, _argv: any): CustomWebpackConfi
 	};
 
 	return [
-		// server-specific configuration
 		{
+			// server-specific configuration
 			...base,
 			name: 'server',
-			entry: ['./src/server/serverRenderer.ts'],
+			entry: is_production ? ['./src/server/index.ts'] : ['./src/server/serverRenderer.ts'],
 			target: 'node',
 			output: {
 				...base.output,
+				// path needs to be an ABSOLUTE file path
+				path: path.resolve(process.cwd(), 'dist/server'),
 				filename: 'js/server.js',
 				libraryTarget: 'commonjs2'
 			}
 		},
 		{
+			// client-specific configuration
 			...base,
 			name: 'client',
-			entry: ['webpack-hot-middleware/client', './src/app/index.tsx'],
+			entry: is_production ? ['./src/app/index.tsx'] : ['webpack-hot-middleware/client', './src/app/index.tsx'],
 			target: 'web',
 			output: {
 				...base.output,
+				// path needs to be an ABSOLUTE file path
+				path: path.resolve(process.cwd(), 'dist/client'),
 				filename: 'js/client.js'
 			},
-			plugins: [...base.plugins, new webpack.HotModuleReplacementPlugin()]
+			plugins: is_production ? base.plugins : [...base.plugins, new webpack.HotModuleReplacementPlugin()]
 		}
 	];
 }

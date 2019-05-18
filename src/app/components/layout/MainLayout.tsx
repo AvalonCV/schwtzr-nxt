@@ -121,7 +121,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 				{this.props.children}
 			</FelaComponent>,
 			<FelaComponent key="footer" as="footer" style={footer_styles}>
-				<DrawPicture image={logo} />
+				{/* <DrawPicture image={logo} /> */}
 
 				<ol>
 					{footer_feature_elements.map((element, index) => (
