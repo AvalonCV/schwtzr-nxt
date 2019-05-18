@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "cross-env NODE_ENV=production webpack",
 		"postinstall": "npm run build",
+		"start": "node dist/server/js/server.js",
 		"dev-server": "ts-node src/server/index.ts"
 	},
 	"keywords": [],
