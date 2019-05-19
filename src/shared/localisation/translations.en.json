@@ -1,0 +1,28 @@
+{
+	"de": {
+		"translation": {
+			"webshop": "Webshop",
+			"connect": "Connect",
+			"intranet": "Intranet",
+			"mediacenter": "Schweitzer Mediencenter",
+			"publication_notice": "Neuerscheinungsdienste",
+			"app_ios": "App für iOs",
+
+			"footer_features.headline": "40 Mio. Titel online",
+			"footer_features.top_selection.name": "Top Auswahl",
+			"footer_features.top_selection.description": "Mit über 40 Millionen Titel der der Marktfürer in Deutschland",
+			"footer_features.experience.name": "Umfangreiche Erfahrung",
+			"footer_features.experience.description": "mit Fokus legen auf die Beschaffungs von Fachinformationen für die rechts-, steuer- und unternehmensberatende Praxis",
+			"footer_features.personal_service.name": "Persönliche Fachberatung",
+			"footer_features.personal_service.description": "In 22 Städten empfehlen und beraten wir Sie ganz persönlich und gehen dabei individuell auf Ihre Bedürfnisse ein.",
+			"footer_features.sustainability.name": "Nachhaltigkeit",
+			"footer_features.sustainability.description": "Wir legen großen Wert auf recyclingfähige Produkte",
+			"footer_features.fast_delivery.name": "Schnelle Lieferung",
+			"footer_features.fast_delivery.description": "Mit der persönlichen 24 Stunden Auslieferung geht es noch schneller",
+			"footer_features.free_shipping.name": "Versandkostenfrei",
+			"footer_features.free_shipping.description": "Innerhalb von Deutschland",
+			"footer_features.secure_payment.name": "Sicher bezahlen",
+			"footer_features.secure_payment.description": "Ganz einfach und bequem per Rechnung oder mit Kreditkarte"
+		}
+	}
+}

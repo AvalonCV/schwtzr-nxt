@@ -3,6 +3,10 @@ import { FelaComponent } from 'react-fela';
 import { IStyle } from 'fela';
 import { NestedStyle } from '../../styles/fela';
 
+import { useTranslation } from 'react-i18next';
+import { getMLOText } from '../../localisation/getMLOText';
+import { TranslationItemKeys } from '../../../shared/localisation/translations';
+
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
 import { DrawPicture } from '../elements/Image';
@@ -73,8 +77,9 @@ const footer_styles: NestedStyle = {
 
 interface NavigationElements {
 	icon?: FontAwesomeIcon | FontAwesomeIconName;
-	name: string;
-	description?: string;
+	name?: string;
+	name_mlo_key?: TranslationItemKeys;
+	description_mlo_key?: TranslationItemKeys;
 }
 
 const footer_feature_elements: NavigationElements[] = [
@@ -84,20 +89,64 @@ const footer_feature_elements: NavigationElements[] = [
 	{ name: 'Nachhaltigkeit', icon: 'leaf' },
 	{ name: 'Schnelle Lieferung', icon: 'truck' },
 	{ name: 'Versandkostenfrei', icon: 'thumbs-up' },
-	{ name: 'Sicher bezahlen', icon: 'credit-card' }
+	{
+		icon: 'credit-card',
+		name_mlo_key: 'footer_features.secure_payment.name',
+		description_mlo_key: 'footer_features.secure_payment.description'
+	}
 ];
 
 const footer_service_elements: NavigationElements[] = [
-	{ name: 'WebShop' },
-	{ name: 'Connect' },
-	{ name: 'Intranet' },
-	{ name: 'Schweitzer Mediencenter' },
-	{ name: 'Neuerscheinungsdienste' },
-	{ name: 'App für iOS' }
+	{ name_mlo_key: 'webshop' },
+	{ name_mlo_key: 'connect' },
+	{ name_mlo_key: 'intranet' },
+	{ name_mlo_key: 'mediacenter' },
+	{ name_mlo_key: 'publication_notice' },
+	{ name_mlo_key: 'app_ios' }
 ];
 
 const footer_service_element_styles: NestedStyle = {
 	lineHeight: '2em'
+};
+
+const footer_service_element_description_styles: NestedStyle = {
+	display: 'block',
+	color: 'white',
+	fontSize: '80%',
+	lineHeight: '1em'
+};
+
+const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
+	const { t } = useTranslation();
+
+	return (
+		<FelaComponent key="footer" as="footer" style={footer_styles}>
+			<h3>{t('footer_features.headline')}</h3>
+			<ol>
+				{footer_feature_elements.map((element, index) => (
+					<FelaComponent key={index} as="li" style={{ ...footer_service_element_styles, color: 'orange' }}>
+						{element.icon && <FontAwesomeIcon icon={element.icon} />}
+						{element.name_mlo_key ? getMLOText(t, element.name_mlo_key) : element.name}
+						{element.description_mlo_key && (
+							<FelaComponent as="span" style={footer_service_element_description_styles}>
+								{getMLOText(t, element.description_mlo_key)}
+							</FelaComponent>
+						)}
+					</FelaComponent>
+				))}
+			</ol>
+
+			<h3>Services</h3>
+			<ol>
+				{footer_service_elements.map((element, index) => (
+					<FelaComponent key={index} as="li" style={footer_service_element_styles}>
+						{element.icon && <FontAwesomeIcon icon={element.icon} />}
+						{element.name_mlo_key ? getMLOText(t, element.name_mlo_key) : element.name}
+					</FelaComponent>
+				))}
+			</ol>
+		</FelaComponent>
+	);
 };
 
 export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutState> {
@@ -122,31 +171,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 				Main and more?
 				{this.props.children}
 			</FelaComponent>,
-			<FelaComponent key="footer" as="footer" style={footer_styles}>
-				<h3>40 Mio. Titel online</h3>
-				<ol>
-					{footer_feature_elements.map((element, index) => (
-						<FelaComponent
-							key={index}
-							as="li"
-							style={{ ...footer_service_element_styles, color: 'orange' }}
-						>
-							{element.icon && <FontAwesomeIcon icon={element.icon} />}
-							{element.name}
-						</FelaComponent>
-					))}
-				</ol>
-
-				<h3>Services</h3>
-				<ol>
-					{footer_service_elements.map((element, index) => (
-						<FelaComponent key={index} as="li" style={footer_service_element_styles}>
-							{element.icon && <FontAwesomeIcon icon={element.icon} />}
-							{element.name}
-						</FelaComponent>
-					))}
-				</ol>
-			</FelaComponent>
+			<MainLayoutFooter key="footer" />
 		];
 	}
 }

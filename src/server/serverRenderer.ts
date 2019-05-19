@@ -6,10 +6,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { App } from './../app/App';
 
+// import { useSSR } from 'react-i18next';
+// import { translations } from './../shared/localisation/translations';
+
 import { createRenderer } from 'fela';
 import { renderToMarkup } from 'fela-dom';
 import { normalizecss } from './../shared/css/normalize.css';
 import { corecss } from './../shared/css/core.css';
+// import { i18n_instance } from '../app/localisation/instance';
 
 const is_production = process.env.NODE_ENV === 'production';
 
@@ -61,7 +65,12 @@ export default function serverRenderer() {
 				const fela_renderer = createRenderer();
 				fela_renderer.renderStatic(normalizecss + ' ' + corecss);
 
-				const body = ReactDOMServer.renderToString(React.createElement(App, { fela_renderer: fela_renderer }));
+				const body = ReactDOMServer.renderToString(
+					React.createElement(App, {
+						fela_renderer: fela_renderer,
+						i18n_instance: req.i18n
+					})
+				);
 
 				const response = `
 					<!DOCTYPE html>

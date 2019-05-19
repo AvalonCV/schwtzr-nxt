@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { createRenderer } from 'fela';
+// import { rehydrate } from 'fela-dom';
+import { i18n_instance } from './localisation/instance';
 
 import { App } from './App';
-// import { rehydrate } from 'fela-dom';
 
 const is_production = process.env.NODE_ENV === 'production';
 const rela_renderer = createRenderer({ devMode: !is_production });
@@ -13,7 +14,7 @@ const rela_renderer = createRenderer({ devMode: !is_production });
 // 	rehydrate(rela_renderer);
 // }
 
-ReactDOM.hydrate(<App fela_renderer={rela_renderer} />, document.getElementById('root'));
+ReactDOM.hydrate(<App fela_renderer={rela_renderer} i18n_instance={i18n_instance} />, document.getElementById('root'));
 
 if (module.hot) {
 	module.hot.accept();
