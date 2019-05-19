@@ -54,7 +54,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 							options: {
 								context: path.resolve(__dirname, 'src'),
 								outputPath: 'images',
-								name: 'images/[name].[hash].[ext]'
+								name: 'images/[name].[hash:7].[ext]'
 							}
 						}
 					]

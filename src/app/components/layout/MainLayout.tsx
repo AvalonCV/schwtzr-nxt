@@ -15,8 +15,9 @@ interface MainLayoutState {}
 const header_styles: NestedStyle = {
 	backgroundColor: '#1d3c8d',
 	color: 'white',
-	minHeight: '128px',
+	minHeight: '95px',
 	position: 'sticky',
+	display: 'flex',
 	top: 0,
 	width: '100%',
 	zIndex: 2
@@ -26,7 +27,11 @@ const header_content_styles: IStyle = {
 	maxWidth: '1280px',
 	margin: '0 auto',
 	padding: '0 1em',
-	boxSizing: 'border-box'
+	boxSizing: 'border-box',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'space-between',
+	flexGrow: 1
 };
 
 const main_styles: IStyle = {
@@ -45,14 +50,11 @@ const header_menu_items = [
 	'Kontakt'
 ];
 
-const header_menu_list_styles: IStyle = {
-	display: 'flex',
-	justifyContent: 'space-between',
-	flexWrap: 'wrap'
-};
+const header_menu_list_styles: IStyle = {};
 
 const header_menu_list_item_styles: IStyle = {
-	display: 'inline-block'
+	display: 'inline-block',
+	padding: '0.4em 2em 0.4em 1em'
 };
 
 const footer_styles: NestedStyle = {
@@ -121,8 +123,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 				{this.props.children}
 			</FelaComponent>,
 			<FelaComponent key="footer" as="footer" style={footer_styles}>
-				<DrawPicture image={logo} />
-
+				<h3>40 Mio. Titel online</h3>
 				<ol>
 					{footer_feature_elements.map((element, index) => (
 						<FelaComponent
