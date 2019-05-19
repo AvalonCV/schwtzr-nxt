@@ -1,13 +1,6 @@
 {
 	"de": {
 		"translation": {
-			"webshop": "Webshop",
-			"connect": "Connect",
-			"intranet": "Intranet",
-			"mediacenter": "Schweitzer Mediencenter",
-			"publication_notice": "Neuerscheinungsdienste",
-			"app_ios": "App für iOs",
-
 			"footer_features.headline": "40 Mio. Titel online",
 			"footer_features.top_selection.name": "Top Auswahl",
 			"footer_features.top_selection.description": "Mit über 40 Millionen Titel der der Marktfürer in Deutschland",
@@ -22,7 +15,39 @@
 			"footer_features.free_shipping.name": "Versandkostenfrei",
 			"footer_features.free_shipping.description": "Innerhalb von Deutschland",
 			"footer_features.secure_payment.name": "Sicher bezahlen",
-			"footer_features.secure_payment.description": "Ganz einfach und bequem per Rechnung oder mit Kreditkarte"
+			"footer_features.secure_payment.description": "Ganz einfach und bequem per Rechnung oder mit Kreditkarte",
+
+			"footer_services.headline": "Services",
+			"footer_services.webshop.name": "Webshop",
+			"footer_services.connect.name": "Connect",
+			"footer_services.intranet.name": "Intranet",
+			"footer_services.mediacenter.name": "Schweitzer Mediencenter",
+			"footer_services.publication_notice.name": "Neuerscheinungsdienste",
+			"footer_services.app_ios.name": "App für iOs",
+			"footer_services.newsletter.name": "Newsletter",
+			"footer_services.newsletter.description": "Anmelden und Vorteile sichern",
+			"footer_services.social_media.name": "Social Media",
+
+			"footer_target_audience.headline": "Zielgruppen",
+			"footer_target_audience.lawyers.name": "Rechtsanwälte",
+			"footer_target_audience.tax_consultants.name": "Steuerberater & WP",
+			"footer_target_audience.companies.name": "Unternehmen",
+			"footer_target_audience.libraries.name": "Bibliotheken",
+			"footer_target_audience.communes.name": "Kommunen",
+			"footer_target_audience.students.name": "Studierende",
+
+			"footer_company.headline": "Unternehmen",
+			"footer_company.about_us.name": "Über uns",
+			"footer_company.sites.name": "Standorte",
+			"footer_company.events.name": "Veranstaltungen",
+			"footer_company.magazine.name": "Kundenmagazin",
+			"footer_company.press.name": "Presse",
+			"footer_company.carreer.name": "Karierre",
+			"footer_company.contact.name": "Kontakt",
+			"footer_company.data_privacy.name": "Datenschutz",
+			"footer_company.gtac.name": "AGB",
+			"footer_company.right_of_withdrawal.name": "Widerrufsrecht",
+			"footer_company.imprint.name": "Impressum"
 		}
 	}
 }
