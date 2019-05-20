@@ -11,6 +11,7 @@ import { App } from './../app/App';
 
 import { createRenderer } from 'fela';
 import { renderToMarkup } from 'fela-dom';
+import { media_query_order } from '../app/styles/fela';
 import { normalizecss } from './../shared/css/normalize.css';
 import { corecss } from './../shared/css/core.css';
 // import { i18n_instance } from '../app/localisation/instance';
@@ -62,7 +63,10 @@ export default function serverRenderer() {
 	return function(req: Request, res: Response, _next: any) {
 		switch (req.path) {
 			case '/':
-				const fela_renderer = createRenderer();
+				const fela_renderer = createRenderer({
+					mediaQueryOrder: media_query_order,
+					devMode: !is_production
+				});
 				fela_renderer.renderStatic(normalizecss + ' ' + corecss);
 
 				const body = ReactDOMServer.renderToString(

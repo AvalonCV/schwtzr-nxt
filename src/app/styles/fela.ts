@@ -26,8 +26,11 @@ export interface NestedStyle extends IStyle {
 	':target'?: IStyle;
 
 	/* Media queries */
-	'@media (min-width: 1280px)'?: IStyle;
+	'@media (min-width:1280px)'?: IStyle;
+	'@media (min-width:640px)'?: IStyle;
 }
+
+export const media_query_order = ['(min-width:640px)', '(min-width:1280px)'];
 
 // export type FelaCSSStyles<T> = { [key in keyof T]: IStyle };
 

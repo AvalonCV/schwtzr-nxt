@@ -35,7 +35,7 @@ const footer_styles: NestedStyle = {
 	boxSizing: 'border-box',
 	padding: '3em 1em 1em 40px',
 	borderTopLeftRadius: '40px',
-	'@media (min-width: 1280px)': {
+	'@media (min-width:1280px)': {
 		marginLeft: 'calc((100% - 1280px) / 2)',
 		paddingRight: 'calc((100% - 1280px) / 2 + 1em)'
 	}
@@ -48,9 +48,14 @@ const footer_section_list_styles: NestedStyle = {
 const footer_section_list_item_styles: NestedStyle = {
 	display: 'inline-block',
 	verticalAlign: 'top',
-	maxWidth: '21%',
-	marginLeft: '2%',
-	textAlign: 'left'
+	width: '100%',
+	textAlign: 'left',
+	'@media (min-width:640px)': {
+		width: '50%'
+	},
+	'@media (min-width:1280px)': {
+		width: '25%'
+	}
 };
 
 const footer_section_list_item_headline_styles: NestedStyle = {
@@ -93,10 +98,7 @@ const footer_navigation: Navigation = [
 	{
 		section_key: 'features',
 		headline_mlo_key: 'footer_features.headline',
-		additional_styles: {
-			maxWidth: '31%',
-			marginLeft: 0
-		},
+		additional_styles: {},
 		additional_list_item_styles: {
 			marginTop: '1em'
 		},
