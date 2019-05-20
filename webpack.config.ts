@@ -59,6 +59,19 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 						}
 					]
 				},
+				{
+					test: /\.woff2?$/,
+					use: [
+						{
+							loader: 'file-loader',
+							options: {
+								context: path.resolve(__dirname, 'src'),
+								outputPath: 'fonts',
+								name: '[name].[hash:7].[ext]'
+							}
+						}
+					]
+				},
 				// https://github.com/kangax/html-minifier/issues/727
 				{
 					test: [

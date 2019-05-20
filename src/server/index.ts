@@ -1,4 +1,5 @@
 import express from 'express';
+import serveStatic from 'serve-static';
 import compression from 'compression';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -26,12 +27,19 @@ webpack_configuration.forEach(element => {
 createLocalisationInstance().then(i18next => {
 	// internationalisation
 	app.use(i18nextMiddleware.handle(i18next));
+	app.disable('x-powered-by');
 
 	if (is_production) {
 		// do not import serverRenderer sync in here! It (currently) breaks 'npm run dev-server' (images cannot be resolved)
 		import('./serverRenderer').then(serverRenderer => {
+			const static_file_options: serveStatic.ServeStaticOptions = {
+				etag: false,
+				maxAge: 1000 * 60 * 24 * 30, // one month?
+				immutable: true
+			};
 			app.use(compression());
-			app.use(public_path + 'images/', express.static('dist/images'));
+			app.use(public_path + 'images/', express.static('dist/images', static_file_options));
+			app.use(public_path + 'fonts/', express.static('dist/fonts', static_file_options));
 			app.use(public_path, express.static('dist/client'));
 			app.use('/', serverRenderer.default());
 			app.listen(port, () => {

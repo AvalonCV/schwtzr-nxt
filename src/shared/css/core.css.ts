@@ -1,5 +1,23 @@
+import UniversLight from './../../app/fonts/UniversLight.woff2';
+import Univers from './../../app/fonts/Univers.woff2';
+
 export const corecss = `
 
+@font-face {
+	font-family: 'Universe';
+	font-style: normal;
+	font-weight: 400;
+	font-display: auto;
+	src: url("${UniversLight}") format("woff2");
+}
+
+@font-face {
+	font-family: 'Universe';
+	font-style: normal;
+	font-weight: 700;
+	font-display: auto;
+	src: url("${Univers}") format("woff2");
+}
 
 @font-face {
 	font-family: 'Font Awesome 5 Free';
@@ -26,7 +44,7 @@ export const corecss = `
 }
 
 html {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Universe', sans-serif;
 	/* should lead to a height of '24px', as the default font-size is '16px' */
 	font-size: calc(14px + (100vw / 960));
 }
