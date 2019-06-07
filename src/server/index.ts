@@ -14,16 +14,18 @@ import { createLocalisationInstance } from './localisation/instance';
 import serverRenderer from './serverRenderer';
 import { initGraphQLServer } from './graphql/initServer';
 
+const is_production = process.env.NODE_ENV === 'production';
 const webpack_configuration = getWebpackConfiguration(process.env, {});
 // try to find configured publicPath
 let public_path = '/';
 webpack_configuration.forEach(element => {
+	if (is_production && element.externals) {
+		element.externals = undefined;
+	}
 	if (element.name === 'client' && element.output.publicPath) {
 		public_path = element.output.publicPath;
 	}
 });
-
-const is_production = process.env.NODE_ENV === 'production';
 
 const main = (): void => {
 	const app = express();
