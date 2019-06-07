@@ -19,9 +19,6 @@ const webpack_configuration = getWebpackConfiguration(process.env, {});
 // try to find configured publicPath
 let public_path = '/';
 webpack_configuration.forEach(element => {
-	if (is_production && element.externals) {
-		element.externals = undefined;
-	}
 	if (element.name === 'client' && element.output.publicPath) {
 		public_path = element.output.publicPath;
 	}
