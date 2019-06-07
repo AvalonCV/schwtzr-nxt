@@ -11,9 +11,8 @@ import getWebpackConfiguration from '../../webpack.config';
 import i18nextMiddleware from 'i18next-express-middleware';
 import { createLocalisationInstance } from './localisation/instance';
 
-const app = express();
-const port = process.env.PORT || 3000;
-const is_production = process.env.NODE_ENV === 'production';
+import serverRenderer from './serverRenderer';
+import { initGraphQLServer } from './graphql/initServer';
 
 const webpack_configuration = getWebpackConfiguration(process.env, {});
 // try to find configured publicPath
@@ -24,40 +23,62 @@ webpack_configuration.forEach(element => {
 	}
 });
 
-createLocalisationInstance().then(i18next => {
-	// internationalisation
-	app.use(i18nextMiddleware.handle(i18next));
-	app.disable('x-powered-by');
+const is_production = process.env.NODE_ENV === 'production';
 
-	if (is_production) {
-		// do not import serverRenderer sync in here! It (currently) breaks 'npm run dev-server' (images cannot be resolved)
-		import('./serverRenderer').then(serverRenderer => {
-			const static_file_options: serveStatic.ServeStaticOptions = {
-				etag: false,
-				maxAge: 1000 * 60 * 24 * 30, // one month?
-				immutable: true
-			};
-			app.use(compression());
-			app.use(public_path + 'images/', express.static('dist/images', static_file_options));
-			app.use(public_path + 'fonts/', express.static('dist/fonts', static_file_options));
-			app.use(public_path, express.static('dist/client'));
-			app.use('/', serverRenderer.default());
+const main = (): void => {
+	const app = express();
+	app.disable('x-powered-by');
+	const port = process.env.PORT || 3000;
+
+	initGraphQLServer(app);
+
+	createLocalisationInstance()
+		.then(i18next => {
+			// internationalisation
+			app.use(i18nextMiddleware.handle(i18next));
+
+			if (is_production) {
+				const static_file_options: serveStatic.ServeStaticOptions = {
+					etag: false,
+					maxAge: 1000 * 60 * 24 * 30, // one month?
+					immutable: true
+				};
+				app.use(compression());
+				app.use(public_path + 'images/', express.static('dist/images', static_file_options));
+				app.use(public_path + 'fonts/', express.static('dist/fonts', static_file_options));
+				app.use(public_path, express.static('dist/client'));
+				app.use('/', serverRenderer());
+			} else {
+				const compiler = webpack(webpack_configuration);
+				const client_compiler = compiler.compilers.find(current_compiler => current_compiler.name === 'client');
+				const dev_middleware = webpackDevMiddleware(compiler, {
+					publicPath: public_path,
+					serverSideRender: true
+				});
+				app.use(dev_middleware);
+
+				// NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
+				if (client_compiler) {
+					app.use(webpackHotMiddleware(client_compiler));
+				}
+				app.use(webpackHotServerMiddleware(compiler));
+			}
+			return {};
+		})
+		.then(() => {
 			app.listen(port, () => {
 				console.log(`App is listening on port ${port}`);
 			});
+		})
+		.catch(error => {
+			throw error;
 		});
-	} else {
-		const compiler = webpack(webpack_configuration);
-		const client_compiler = compiler.compilers.find(compiler => compiler.name === 'client');
+};
 
-		app.use(webpackDevMiddleware(compiler, { publicPath: public_path, serverSideRender: true }));
-		// NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
-		if (client_compiler) {
-			app.use(webpackHotMiddleware(client_compiler));
-		}
-		app.use(webpackHotServerMiddleware(compiler));
-		app.listen(port, () => {
-			console.log(`App is listening on port ${port}`);
-		});
-	}
-});
+export function applicationServer() {
+	return main;
+}
+
+if (is_production) {
+	main();
+}

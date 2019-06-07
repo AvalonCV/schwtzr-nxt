@@ -1,0 +1,31 @@
+type Query {
+	header: Header
+	footer: Footer
+	navigation(id: ID!): Navigation
+}
+
+type Header {
+	section: [Navigation!]!
+}
+
+type Footer {
+	section: [Navigation!]!
+}
+
+type Navigation {
+	id: ID!
+	section_key: String!
+	headline_mlo_key: String
+	description_mlo_key: String
+	elements: [NavigationElement!]!
+}
+
+type NavigationElement {
+	id: ID!
+	this2navigation: ID!
+	this2navigation_element: ID
+	icon: String
+	show_as_highlight: Boolean
+	name_mlo_key: String
+	description_mlo_key: String
+}

@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"alwaysStrict": true,
 		"esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
@@ -21,8 +22,9 @@
 		/* Strict Type-Checking Options */
 		"strict": true,
 		"strictNullChecks": true,
-		"strictFunctionTypes": true ,
-		"strictPropertyInitialization": true ,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"typeRoots" : ["./node_modules/@types", "./src/@types"],
 		"target": "es5"
 	},
 	"include": ["./src/**/**/*"]

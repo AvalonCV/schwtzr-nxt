@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import WebpackNodeExternals from 'webpack-node-externals';
 
 // // type Modify<T, R> = Pick<T, Exclude<keyof T, keyof R>> & R;
 // // type MyWebpackConfiguration = Modify<
@@ -9,8 +10,16 @@ import webpack from 'webpack';
 // // 		module: webpack.Module;
 // // 	}
 // // >;
+
+interface CustomWebpackOutput extends webpack.Output {
+	filename: string;
+	path: string;
+	publicPath: string;
+}
+
 interface CustomWebpackConfiguration extends webpack.Configuration {
-	output: webpack.Output;
+	name: '' | 'server' | 'client';
+	output: CustomWebpackOutput;
 	module: webpack.Module;
 	plugins: webpack.Plugin[];
 }
@@ -24,9 +33,11 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 
 	const base: CustomWebpackConfiguration = {
 		mode: is_production ? 'production' : 'development',
+		name: '',
 		// Enable sourcemaps for debugging webpack's output.
 		devtool: is_production ? 'source-map' : 'cheap-module-eval-source-map',
 		output: {
+			filename: '',
 			// path needs to be an ABSOLUTE file path
 			path: path.resolve(process.cwd(), 'dist'),
 			publicPath: is_production ? '/public/' : '/'
@@ -72,7 +83,20 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 						}
 					]
 				},
-				// https://github.com/kangax/html-minifier/issues/727
+				{
+					test: /\.(css)$/,
+					use: [
+						{
+							loader: 'raw-loader'
+						}
+					]
+				},
+				{
+					test: /\.(graphql|gql)$/,
+					exclude: /node_modules/,
+					loader: 'graphql-tag/loader'
+				},
+				// github.com/kangax/html-minifier/issues/727
 				{
 					test: [
 						path.resolve(__dirname, 'node_modules/uglify-js/tools/node.js'),
@@ -90,6 +114,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			// server-specific configuration
 			...base,
 			name: 'server',
+			externals: [WebpackNodeExternals()],
 			entry: is_production ? ['./src/server/index.ts'] : ['./src/server/serverRenderer.ts'],
 			target: 'node',
 			output: {

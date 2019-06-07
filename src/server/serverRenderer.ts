@@ -12,8 +12,8 @@ import { App } from './../app/App';
 import { createRenderer } from 'fela';
 import { renderToMarkup } from 'fela-dom';
 import { media_query_order } from '../app/styles/fela';
-import { normalizecss } from './../shared/css/normalize.css';
 import { corecss } from './../shared/css/core.css';
+import normalizecss from './../shared/css/normalize.css';
 // import { i18n_instance } from '../app/localisation/instance';
 
 const is_production = process.env.NODE_ENV === 'production';
@@ -49,14 +49,22 @@ const getWebpackScriptAssets = (res: Response) => {
 			})
 			.forEach(element => {
 				for (let asset in element.compilation.assets) {
-					normalizeAssets(asset).forEach(value => {
-						value.endsWith('.js') && assets.push(value);
-					});
+					if (element.compilation.assets.hasOwnProperty(asset)) {
+						normalizeAssets(asset).forEach(value => {
+							// tslint:disable-next-line: no-unused-expression
+							value.endsWith('.js') && assets.push(value);
+						});
+					}
 				}
 			});
 	}
 
-	return assets.map(path => `<script type="text/javascript" src="${path}" defer></script>`).join('\n');
+	return assets
+		.map(
+			(path, _index, array) =>
+				`<script type="text/javascript" src="${path}" ${array.length === 1 ? 'async' : 'defer'}></script>`
+		)
+		.join('\n');
 };
 
 export default function serverRenderer() {
@@ -98,6 +106,7 @@ export default function serverRenderer() {
 				res.status(200).send(
 					minify(response, {
 						collapseWhitespace: true,
+						minifyJS: false,
 						minifyCSS: {
 							/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
 							compatibility: {
