@@ -17,7 +17,7 @@ interface CustomWebpackOutput extends webpack.Output {
 	publicPath: string;
 }
 
-interface CustomWebpackConfiguration extends webpack.Configuration {
+export interface CustomWebpackConfiguration extends webpack.Configuration {
 	name: '' | 'server' | 'client';
 	output: CustomWebpackOutput;
 	module: webpack.Module;
@@ -115,7 +115,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			...base,
 			name: 'server',
 			externals: [WebpackNodeExternals()],
-			entry: is_production ? ['./src/server/index.ts'] : ['./src/server/serverRenderer.ts'],
+			entry: is_production ? ['./src/server/index.prod.ts'] : ['./src/server/serverRenderer.ts'],
 			target: 'node',
 			output: {
 				...base.output,

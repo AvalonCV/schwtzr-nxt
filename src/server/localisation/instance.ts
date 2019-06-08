@@ -1,3 +1,4 @@
+import express from 'express';
 import i18n from 'i18next';
 import { initReactI18next, useSSR } from 'react-i18next';
 import i18nextMiddleware from 'i18next-express-middleware';
@@ -5,7 +6,7 @@ import { translations } from './../../shared/localisation/translations';
 
 type myUseSSR = (initialI18nStore: any, initialLanguage: any, props: object) => void;
 
-export async function createLocalisationInstance(initial_language = 'de') {
+export async function createLocalisationInstance(app: express.Express, initial_language = 'de') {
 	const i18next_instance = i18n.use(initReactI18next).use(i18nextMiddleware.LanguageDetector);
 	return await i18next_instance
 		.init({
@@ -28,6 +29,7 @@ export async function createLocalisationInstance(initial_language = 'de') {
 			return i18next_instance.changeLanguage('de');
 		})
 		.then(() => {
-			return i18next_instance;
+			app.use(i18nextMiddleware.handle(i18next_instance));
+			return app;
 		});
 }
