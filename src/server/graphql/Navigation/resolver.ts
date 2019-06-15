@@ -1,19 +1,21 @@
-import { footer_navigation } from './data';
+import { navigations } from './data';
 
 export const resolver = {
 	Query: {
-		header: () => {
-			return null;
+		getHeaderNavigation: () => {
+			return navigations.find(navigation => {
+				return navigation.id === 'header';
+			});
 		},
 
-		footer: () => {
-			return footer_navigation;
-		},
-
-		navigation: (_parent: object, { id }: { id: string }) => {
-			return footer_navigation.find(element => {
-				return element.section_key === id;
+		getFooterNavigation: () => {
+			return navigations.find(navigation => {
+				return navigation.id === 'footer';
 			});
 		}
+
+		// getNavigationSection: (_parent: object, { id }: { id: string }) => {
+		// 	return null;
+		// }
 	}
 };

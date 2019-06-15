@@ -1,11 +1,19 @@
 {
 	"de": {
 		"translation": {
+			"header.navigation.new_releases": "Neuerscheinungen",
+			"header.navigation.databases": "Datenbanken",
+			"header.navigation.ebooks": "E-Books",
+			"header.navigation.elearning": "E-Learning",
+			"header.navigation.loose_leaf": "Loseblattwerke",
+			"header.navigation.magazines": "Zeitschriften | E-Paper",
+			"header.navigation.contact": "Kontakt",
+
 			"footer_features.headline": "40 Mio. Titel online",
 			"footer_features.top_selection.name": "Top Auswahl",
-			"footer_features.top_selection.description": "Mit über 40 Millionen Titel der der Marktfürer in Deutschland",
+			"footer_features.top_selection.description": "Mit über 40 Millionen Titel der der Marktführer in Deutschland",
 			"footer_features.experience.name": "Umfangreiche Erfahrung",
-			"footer_features.experience.description": "mit Fokus legen auf die Beschaffungs von Fachinformationen für die rechts-, steuer- und unternehmensberatende Praxis",
+			"footer_features.experience.description": "mit Fokus legen auf die Beschaffung von Fachinformationen für die rechts-, steuer- und unternehmensberatende Praxis",
 			"footer_features.personal_service.name": "Persönliche Fachberatung",
 			"footer_features.personal_service.description": "In 22 Städten empfehlen und beraten wir Sie ganz persönlich und gehen dabei individuell auf Ihre Bedürfnisse ein.",
 			"footer_features.sustainability.name": "Nachhaltigkeit",
@@ -47,7 +55,11 @@
 			"footer_company.data_privacy.name": "Datenschutz",
 			"footer_company.gtac.name": "AGB",
 			"footer_company.right_of_withdrawal.name": "Widerrufsrecht",
-			"footer_company.imprint.name": "Impressum"
+			"footer_company.imprint.name": "Impressum",
+
+			"footer.price_info": "Alle Preisangaben inkl. gesetzlicher MwSt.",
+			"footer.copyright_hint_text": "Alle Rechte vorbehalten. © Schweitzer Fachinformationen 2019"
+
 		}
 	}
 }

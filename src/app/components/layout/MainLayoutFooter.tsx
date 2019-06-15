@@ -4,7 +4,7 @@ import { NestedStyle } from '../../styles/fela';
 
 import { useTranslation } from 'react-i18next';
 import { getMLOText } from '../../localisation/getMLOText';
-import { TranslationItemKeys } from '../../../shared/localisation/translations';
+import { TranslationItemKey } from '../../../shared/localisation/translations';
 
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
@@ -12,7 +12,7 @@ type Navigation = NavigationSection[];
 
 interface NavigationSection {
 	section_key: string;
-	headline_mlo_key: TranslationItemKeys;
+	headline_mlo_key: TranslationItemKey;
 	elements: NavigationSectionElements[];
 	additional_styles?: NestedStyle;
 	additional_list_item_styles?: NestedStyle;
@@ -20,8 +20,8 @@ interface NavigationSection {
 
 interface NavigationSectionElements {
 	icon?: FontAwesomeIcon | FontAwesomeIconName;
-	name_mlo_key: TranslationItemKeys;
-	description_mlo_key?: TranslationItemKeys;
+	name_mlo_key: TranslationItemKey;
+	description_mlo_key?: TranslationItemKey;
 	show_as_highlight?: boolean;
 	additional_styles?: NestedStyle;
 	additional_content_function?: () => React.ReactNode | React.ReactNode[];
@@ -275,6 +275,10 @@ export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
 						</FelaComponent>
 					</FelaComponent>
 				))}
+			</FelaComponent>
+			<FelaComponent as="div" style={{ textAlign: 'center', fontSize: '80%' }}>
+				<strong>{getMLOText(t, 'footer.price_info')}</strong>
+				<div>{getMLOText(t, 'footer.copyright_hint_text')}</div>
 			</FelaComponent>
 		</FelaComponent>
 	);

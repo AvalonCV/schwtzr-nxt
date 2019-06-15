@@ -1,0 +1,17 @@
+extend type Query {
+	getBook(isbn: String): Book
+	getBooks(q: String, status: [String], authors: [String], categories: [String]): [Book]!
+}
+
+type Book {
+	title: String!
+	isbn: String
+	pageCount: Int!
+	publishedDate: String
+	thumbnailUrl: String
+	shortDescription: String
+	longDescription: String
+	status: String!
+	authors: [String]!
+	categories: [String]!
+}
