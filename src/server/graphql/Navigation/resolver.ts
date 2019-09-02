@@ -1,6 +1,7 @@
 import { navigations } from './data';
+import { IResolvers } from 'graphql-tools';
 
-export const resolver = {
+export const resolver: IResolvers = {
 	Query: {
 		getHeaderNavigation: () => {
 			return navigations.find(navigation => {

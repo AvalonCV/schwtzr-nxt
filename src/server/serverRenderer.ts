@@ -3,8 +3,12 @@ import { Request, Response } from 'express';
 import { minify } from 'html-minifier';
 
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
 import { App } from './../app/App';
+
+import { ApolloClient } from 'apollo-client';
+import { SchemaLink } from 'apollo-link-schema';
+import { renderToStringWithData } from 'react-apollo';
+import { gql_schema } from './graphql/index';
 
 // import { useSSR } from 'react-i18next';
 // import { translations } from './../shared/localisation/translations';
@@ -14,6 +18,7 @@ import { renderToMarkup } from 'fela-dom';
 import { media_query_order } from '../app/styles/fela';
 import { corecss } from './../shared/css/core.css';
 import normalizecss from './../shared/css/normalize.css';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 // import { i18n_instance } from '../app/localisation/instance';
 
 const is_production = process.env.NODE_ENV === 'production';
@@ -77,47 +82,63 @@ export default function serverRenderer() {
 				});
 				fela_renderer.renderStatic(normalizecss + ' ' + corecss);
 
-				const body = ReactDOMServer.renderToString(
-					React.createElement(App, {
+				const apollo_client = new ApolloClient({
+					ssrMode: true,
+					link: new SchemaLink({ schema: gql_schema }),
+					cache: new InMemoryCache()
+				});
+
+				const getReactApp = () => {
+					return React.createElement(App, {
 						fela_renderer: fela_renderer,
-						i18n_instance: req.i18n
-					})
-				);
+						i18n_instance: req.i18n,
+						apollo_client: apollo_client
+					});
+				};
 
-				const response = `
-					<!DOCTYPE html>
-					<html lang="en">
-					<head>
-						<meta charset="utf-8">
-						<meta http-equiv="X-UA-Compatible" content="IE=edge">
-						<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-						<meta name="theme-color" content="#000000">
+				renderToStringWithData(getReactApp())
+					.then((content: string) => {
+						const response = `
+						<!DOCTYPE html>
+						<html lang="en">
+						<head>
+							<meta charset="utf-8">
+							<meta http-equiv="X-UA-Compatible" content="IE=edge">
+							<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+							<meta name="theme-color" content="#000000">
 
-						${renderToMarkup(fela_renderer)}
-						<title>Test</title>
-					</head>
-					<body>
-						<div class="main_root" id="root">${body}</div>
-						${getWebpackScriptAssets(res)}
-					</body>
-					</html>
-				`;
-				// res.status(200).send(response);
-				res.status(200).send(
-					minify(response, {
-						collapseWhitespace: true,
-						minifyJS: false,
-						minifyCSS: {
-							/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
-							compatibility: {
-								properties: {
-									colors: false,
-									merging: false
+							${renderToMarkup(fela_renderer)}
+							<title>Test</title>
+						</head>
+						<body>
+							<div class="main_root" id="root">${content}</div>
+							<script>
+								window.__APOLLO_STATE__ = ${JSON.stringify(apollo_client.extract())}
+							</script>
+							${getWebpackScriptAssets(res)}
+						</body>
+						</html>
+					`;
+						// res.status(200).send(response);
+						res.status(200).send(
+							minify(response, {
+								collapseWhitespace: true,
+								minifyJS: false,
+								minifyCSS: {
+									/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
+									compatibility: {
+										properties: {
+											colors: false,
+											merging: false
+										}
+									}
 								}
-							}
-						}
+							})
+						);
 					})
-				);
+					.catch(error => {
+						res.status(503).send(error.message);
+					});
 				break;
 
 			default:

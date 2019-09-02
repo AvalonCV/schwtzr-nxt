@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { getMLOText } from '../../localisation/getMLOText';
 import { TranslationItemKey } from '../../../shared/localisation/translations';
 
+import { Query, QueryResult } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
 type Navigation = NavigationSection[];
@@ -226,6 +229,8 @@ const footer_navigation: Navigation = [
 export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
 	const { t } = useTranslation();
 
+	const getBooks = gql('query {getBooks {title, thumbnailUrl}}');
+
 	return (
 		<FelaComponent key="footer" as="footer" style={footer_styles}>
 			<FelaComponent as="ol" style={footer_section_list_styles}>
@@ -276,6 +281,29 @@ export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
 					</FelaComponent>
 				))}
 			</FelaComponent>
+
+			<div>
+				<h2>GQL</h2>
+				<Query query={getBooks}>
+					{(result: QueryResult) => {
+						return (
+							(result.loading && <span>Loading</span>) ||
+							(result.error && <span>result.error.message</span>) || (
+								<ol>
+									{result.data.getBooks.map((book: { title: string; thumbnailUrl: string }) => {
+										return (
+											<li>
+												{book.title} <img src={book.thumbnailUrl} />{' '}
+											</li>
+										);
+									})}
+								</ol>
+							)
+						);
+					}}
+				</Query>
+			</div>
+
 			<FelaComponent as="div" style={{ textAlign: 'center', fontSize: '80%' }}>
 				<strong>{getMLOText(t, 'footer.price_info')}</strong>
 				<div>{getMLOText(t, 'footer.copyright_hint_text')}</div>
