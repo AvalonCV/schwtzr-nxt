@@ -21,6 +21,8 @@ import normalizecss from './../shared/css/normalize.css';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 // import { i18n_instance } from '../app/localisation/instance';
 
+import { StaticRouter } from 'react-router';
+
 const is_production = process.env.NODE_ENV === 'production';
 
 // Or use 'webpack.compilation.Asset' ?
@@ -76,6 +78,7 @@ export default function serverRenderer() {
 	return function(req: Request, res: Response, _next: any) {
 		switch (req.path) {
 			case '/':
+			case '/gtc':
 				const fela_renderer = createRenderer({
 					mediaQueryOrder: media_query_order,
 					devMode: !is_production
@@ -92,7 +95,9 @@ export default function serverRenderer() {
 					return React.createElement(App, {
 						fela_renderer: fela_renderer,
 						i18n_instance: req.i18n,
-						apollo_client: apollo_client
+						apollo_client: apollo_client,
+						RouterComponent: StaticRouter,
+						router_props: { location: req.path }
 					});
 				};
 

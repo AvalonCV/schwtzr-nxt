@@ -1,6 +1,15 @@
 extend type Query {
 	getBook(isbn: String): Book
 	getBooks(q: String, status: [String], authors: [String], categories: [String]): [Book]!
+
+	searchBooks(
+		q: String,
+		status: [String],
+		authors: [String],
+		categories: [String],
+		rpage: Int = 1,
+		results_per_page: Int = 12
+	): [Book]!
 }
 
 type Book {

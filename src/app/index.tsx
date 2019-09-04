@@ -10,6 +10,8 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 
+import { BrowserRouter } from 'react-router-dom';
+
 import { App } from './App';
 
 const is_production = process.env.NODE_ENV === 'production';
@@ -33,7 +35,13 @@ const apollo_client = new ApolloClient({
 });
 
 ReactDOM.hydrate(
-	<App apollo_client={apollo_client} fela_renderer={rela_renderer} i18n_instance={i18n_instance} />,
+	<App
+		apollo_client={apollo_client}
+		fela_renderer={rela_renderer}
+		i18n_instance={i18n_instance}
+		RouterComponent={BrowserRouter}
+		router_props={{}}
+	/>,
 	document.getElementById('root')
 );
 

@@ -9,6 +9,9 @@ import teaser_image from './../../images/image_teaser_woman.gimp2.jpg';
 
 import { MainLayoutFooter } from './MainLayoutFooter';
 
+import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
+
 interface MainLayoutProps {}
 interface MainLayoutState {}
 
@@ -77,6 +80,19 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			<FelaComponent key="main" as="main" style={main_styles}>
 				<DrawPicture image={teaser_image} />
 				Main and more?
+				<Switch>
+					<Route path="/gtc">
+						<span>
+							GTC <Link to="/">zu Haupt</Link>
+						</span>
+					</Route>
+					<Route path="/">
+						<span>
+							Haupt
+							<Link to="/gtc">zu GTC</Link>
+						</span>
+					</Route>
+				</Switch>
 				{this.props.children}
 			</FelaComponent>,
 			<MainLayoutFooter key="footer" />
