@@ -23,6 +23,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { StaticRouter } from 'react-router';
 
+import { FilledContext } from 'react-helmet-async';
+
 const is_production = process.env.NODE_ENV === 'production';
 
 // Or use 'webpack.compilation.Asset' ?
@@ -74,6 +76,8 @@ const getWebpackScriptAssets = (res: Response) => {
 		.join('\n');
 };
 
+type EventuallyFilledContext = Partial<FilledContext>;
+
 export default function serverRenderer() {
 	return function(req: Request, res: Response, _next: any) {
 		switch (req.path) {
@@ -91,39 +95,44 @@ export default function serverRenderer() {
 					cache: new InMemoryCache()
 				});
 
+				const router_context = {};
+				const helmet_context: EventuallyFilledContext = {};
 				const getReactApp = () => {
 					return React.createElement(App, {
 						fela_renderer: fela_renderer,
 						i18n_instance: req.i18n,
 						apollo_client: apollo_client,
 						RouterComponent: StaticRouter,
-						router_props: { location: req.path }
+						router_props: { location: req.path, context: router_context },
+						react_helmet_context: helmet_context
 					});
 				};
 
 				renderToStringWithData(getReactApp())
 					.then((content: string) => {
 						const response = `
-						<!DOCTYPE html>
-						<html lang="en">
-						<head>
-							<meta charset="utf-8">
-							<meta http-equiv="X-UA-Compatible" content="IE=edge">
-							<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-							<meta name="theme-color" content="#000000">
+							<!DOCTYPE html>
+							<html lang="en">
+							<head>
+								<meta charset="utf-8">
+								<meta http-equiv="X-UA-Compatible" content="IE=edge">
+								<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+								<meta name="theme-color" content="#000000">
 
-							${renderToMarkup(fela_renderer)}
-							<title>Test</title>
-						</head>
-						<body>
-							<div class="main_root" id="root">${content}</div>
-							<script>
-								window.__APOLLO_STATE__ = ${JSON.stringify(apollo_client.extract())}
-							</script>
-							${getWebpackScriptAssets(res)}
-						</body>
-						</html>
-					`;
+								${renderToMarkup(fela_renderer)}
+								${(helmet_context.helmet && helmet_context.helmet.title.toString()) || '<title>Test</title>'}
+								${helmet_context.helmet && helmet_context.helmet.meta.toString()}
+							</head>
+							<body>
+								<div class="main_root" id="root">${content}</div>
+								<script>
+									window.__APOLLO_STATE__ = ${JSON.stringify(apollo_client.extract())}
+								</script>
+								${getWebpackScriptAssets(res)}
+							</body>
+							</html>
+						`;
+
 						// res.status(200).send(response);
 						res.status(200).send(
 							minify(response, {
