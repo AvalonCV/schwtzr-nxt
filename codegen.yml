@@ -1,0 +1,26 @@
+overwrite: true
+schema: 'http://localhost:3000/graphql'
+documents: 'src/**/*.gql'
+generates:
+    src/generated/graphql.tsx:
+        hooks:
+            afterOneFileWrite:
+                - prettier --write
+        plugins:
+            - add: '// tslint:disable: no-any'
+            - add: '// tslint:disable: max-line-length'
+            - add: ''
+            - add: 'import { TranslationItemKey } from "../shared/localisation/translations";'
+            - add: ''
+
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-resolvers'
+#            - 'typescript-react-apollo'
+        config:
+            scalars:
+                Date: Date
+                MLOKey: TranslationItemKey
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'

@@ -8,7 +8,7 @@ import { I18nextProvider } from 'react-i18next';
 import { MainLayout } from './components/layout/MainLayout';
 import i18next from 'i18next';
 
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 
 import { StaticRouterProps } from 'react-router';

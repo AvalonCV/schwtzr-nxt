@@ -1,6 +1,6 @@
 extend type Query {
-	getHeaderNavigation: Header
-	getFooterNavigation: Footer
+	getHeaderNavigation: Header!
+	getFooterNavigation: Footer!
 	getNavigationSection(id: ID!): NavigationSection
 }
 
@@ -14,14 +14,14 @@ type Footer {
 
 type NavigationSection {
 	section_key: String!
-	headline_mlo_key: String
-	description_mlo_key: String
+	headline_mlo_key: MLOKey
+	description_mlo_key: MLOKey
 	elements: [NavigationSectionElement!]!
 }
 
 type NavigationSectionElement {
 	icon: String
 	show_as_highlight: Boolean
-	name_mlo_key: String
-	description_mlo_key: String
+	name_mlo_key: MLOKey
+	description_mlo_key: MLOKey
 }

@@ -37,13 +37,13 @@ interface FontAwesomeIconProps {
 	additional_styles?: NestedStyle;
 }
 
-interface getFontAwesomeIconStyleProps extends FontAwesomeIconProps {
+interface GetFontAwesomeIconStyleProps extends FontAwesomeIconProps {
 	type: FontAwesomeIconType;
 	icon: FontAwesomeIconName;
 }
 
-const getFontAwesomeIconStyles: ({  }: getFontAwesomeIconStyleProps) => NestedStyle = (
-	props: getFontAwesomeIconStyleProps
+const getFontAwesomeIconStyles: ({  }: GetFontAwesomeIconStyleProps) => NestedStyle = (
+	props: GetFontAwesomeIconStyleProps
 ) => {
 	return {
 		display: 'inline-block',

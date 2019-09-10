@@ -8,6 +8,10 @@ import { TranslationItemKey } from '../../../shared/localisation/translations';
 
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
+import { useQuery } from '@apollo/react-hooks';
+import getFooterQueryDocument from './Footer/getFooterNavigation.gql';
+import { GetFooterDataQuery } from '../../../generated/graphql';
+
 type Navigation = NavigationSection[];
 
 interface NavigationSection {
@@ -226,6 +230,8 @@ const footer_navigation: Navigation = [
 export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
 	const { t } = useTranslation();
 
+	const { loading, error, data } = useQuery<GetFooterDataQuery>(getFooterQueryDocument);
+
 	return (
 		<FelaComponent key="footer" as="footer" style={footer_styles}>
 			<FelaComponent as="ol" style={footer_section_list_styles}>
@@ -276,6 +282,20 @@ export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
 					</FelaComponent>
 				))}
 			</FelaComponent>
+
+			<div>
+				{!loading &&
+					!error &&
+					data &&
+					data.getFooterNavigation &&
+					data.getFooterNavigation.sections.map(section => {
+						return (
+							<span key={section.section_key}>
+								{section.headline_mlo_key && getMLOText(t, section.headline_mlo_key)}
+							</span>
+						);
+					})}
+			</div>
 
 			<FelaComponent as="div" style={{ textAlign: 'center', fontSize: '80%' }}>
 				<strong>{getMLOText(t, 'footer.price_info')}</strong>

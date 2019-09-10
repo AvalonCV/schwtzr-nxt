@@ -2,7 +2,7 @@ import { FontAwesomeIcon, FontAwesomeIconName } from '../../../app/components/el
 import { NestedStyle } from '../../../app/styles/fela';
 import { TranslationItemKey } from '../../../shared/localisation/translations';
 
-interface Navigation {
+export interface Navigation {
 	id: string;
 	sections: NavigationSection[];
 }

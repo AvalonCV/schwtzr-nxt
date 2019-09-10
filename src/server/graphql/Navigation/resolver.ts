@@ -1,4 +1,4 @@
-import { navigations } from './data';
+import { navigations, Navigation } from './data';
 import { IResolvers } from 'graphql-tools';
 
 export const resolver: IResolvers = {
@@ -9,7 +9,7 @@ export const resolver: IResolvers = {
 			});
 		},
 
-		getFooterNavigation: () => {
+		getFooterNavigation: (_parent, _args, _context): Navigation | undefined => {
 			return navigations.find(navigation => {
 				return navigation.id === 'footer';
 			});
