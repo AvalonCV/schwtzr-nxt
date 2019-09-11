@@ -10,7 +10,7 @@ import teaser_image from './../../images/image_teaser_woman.gimp2.jpg';
 import { MainLayoutFooter } from './MainLayoutFooter';
 
 import { Switch, Route } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link } from './../elements/Link';
 
 interface MainLayoutProps {}
 interface MainLayoutState {}
@@ -65,7 +65,9 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 		return [
 			<FelaComponent key="header" as="header" style={header_styles}>
 				<FelaComponent as="div" style={header_content_styles}>
-					<DrawPicture image={logo} />
+					<Link to="/">
+						<DrawPicture image={logo} />
+					</Link>
 					<FelaComponent as="ol" style={header_menu_list_styles}>
 						{header_menu_items.map((element, index) => {
 							return (

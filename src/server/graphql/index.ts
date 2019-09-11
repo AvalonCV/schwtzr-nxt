@@ -2,6 +2,11 @@ import { makeExecutableSchema, IResolvers } from 'graphql-tools';
 
 import link_schema from './linkSchema.gql';
 
+import image_schema from './Images/schema.gql';
+
+import document_schema from './Documents/schema.gql';
+import { resolver as DocumentResolver } from './Documents/resolver';
+
 import date_schema from './Date/schema.gql';
 import { resolver as DateResolver } from './Date/resolver';
 
@@ -16,9 +21,24 @@ import { resolver as BookResolver } from './Books/resolver';
 
 import merge from 'lodash/merge';
 
-export const gql_document_nodes = [link_schema, date_schema, mlo_schema, navigation_schema, book_schema];
+export const gql_document_nodes = [
+	link_schema,
+	date_schema,
+	mlo_schema,
+	image_schema,
+	document_schema,
+	navigation_schema,
+	book_schema
+];
 // lodash.merge does a deep-merge (as all resolver have a 'Query' part)
-export const gql_resolvers: IResolvers = merge({}, DateResolver, MLOResolver, BookResolver, NavigationResolver);
+export const gql_resolvers: IResolvers = merge(
+	{},
+	DateResolver,
+	MLOResolver,
+	BookResolver,
+	NavigationResolver,
+	DocumentResolver
+);
 export const gql_schema = makeExecutableSchema({
 	typeDefs: gql_document_nodes,
 	resolvers: gql_resolvers

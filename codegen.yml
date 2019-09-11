@@ -9,9 +9,7 @@ generates:
         plugins:
             - add: '// tslint:disable: no-any'
             - add: '// tslint:disable: max-line-length'
-            - add: ''
             - add: 'import { TranslationItemKey } from "../shared/localisation/translations";'
-            - add: ''
 
             - 'typescript'
             - 'typescript-operations'

@@ -84,7 +84,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					]
 				},
 				{
-					test: /\.(css)$/,
+					test: /\.(css|md)$/,
 					use: [
 						{
 							loader: 'raw-loader'
@@ -106,7 +106,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 				}
 			]
 		},
-		plugins: []
+		plugins: [],
+		watchOptions: { poll: 2000 }
 	};
 
 	return [

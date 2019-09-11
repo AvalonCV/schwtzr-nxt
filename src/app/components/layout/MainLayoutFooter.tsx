@@ -8,6 +8,8 @@ import { TranslationItemKey } from '../../../shared/localisation/translations';
 
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
+import { Link } from './../elements/Link';
+
 import { useQuery } from '@apollo/react-hooks';
 import getFooterQueryDocument from './Footer/getFooterNavigation.gql';
 import { GetFooterDataQuery } from '../../../generated/graphql';
@@ -187,9 +189,15 @@ const footer_navigation: Navigation = [
 								justifyContent: 'space-between'
 							}}
 						>
-							<FontAwesomeIcon key="facebook" icon="facebook-square" type="brands" />
-							<FontAwesomeIcon key="youtube" icon="youtube" type="brands" />
-							<FontAwesomeIcon key="tritter" icon="twitter" type="brands" />
+							<Link to="https://de-de.facebook.com/schweitzer.social">
+								<FontAwesomeIcon key="facebook" icon="facebook-square" type="brands" />
+							</Link>
+							<Link to="https://www.youtube.com/channel/UC7dRHcw83GaLrPjN-aZ_scg">
+								<FontAwesomeIcon key="youtube" icon="youtube" type="brands" />
+							</Link>
+							<Link to="https://twitter.com/SchweitzerInfo">
+								<FontAwesomeIcon key="twitter" icon="twitter" type="brands" />
+							</Link>
 						</FelaComponent>
 					);
 				}

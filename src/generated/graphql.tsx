@@ -2,7 +2,6 @@
 // tslint:disable: max-line-length
 import { TranslationItemKey } from '../shared/localisation/translations';
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } &
 	{ [P in K]-?: NonNullable<T[P]> };
@@ -40,6 +39,13 @@ export enum CacheControlScope {
 	Private = 'PRIVATE'
 }
 
+export type Document = {
+	__typename?: 'Document';
+	title: Scalars['String'];
+	teaser_image?: Maybe<Image>;
+	markdown_content: Scalars['String'];
+};
+
 export type Footer = {
 	__typename?: 'Footer';
 	sections: Array<NavigationSection>;
@@ -48,6 +54,14 @@ export type Footer = {
 export type Header = {
 	__typename?: 'Header';
 	sections: Array<NavigationSection>;
+};
+
+export type Image = {
+	__typename?: 'Image';
+	url: Scalars['String'];
+	height?: Maybe<Scalars['Int']>;
+	width?: Maybe<Scalars['Int']>;
+	alt?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -74,12 +88,17 @@ export type NavigationSectionElement = {
 export type Query = {
 	__typename?: 'Query';
 	_?: Maybe<Scalars['Boolean']>;
+	getDocument?: Maybe<Document>;
 	getHeaderNavigation: Header;
 	getFooterNavigation: Footer;
 	getNavigationSection?: Maybe<NavigationSection>;
 	getBook?: Maybe<Book>;
 	getBooks: Array<Maybe<Book>>;
 	searchBooks: Array<Maybe<Book>>;
+};
+
+export type QueryGetDocumentArgs = {
+	identifier?: Maybe<Scalars['String']>;
 };
 
 export type QueryGetNavigationSectionArgs = {
@@ -201,15 +220,17 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
 	Query: ResolverTypeWrapper<{}>;
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+	String: ResolverTypeWrapper<Scalars['String']>;
+	Document: ResolverTypeWrapper<Document>;
+	Image: ResolverTypeWrapper<Image>;
+	Int: ResolverTypeWrapper<Scalars['Int']>;
 	Header: ResolverTypeWrapper<Header>;
 	NavigationSection: ResolverTypeWrapper<NavigationSection>;
-	String: ResolverTypeWrapper<Scalars['String']>;
 	MLOKey: ResolverTypeWrapper<Scalars['MLOKey']>;
 	NavigationSectionElement: ResolverTypeWrapper<NavigationSectionElement>;
 	Footer: ResolverTypeWrapper<Footer>;
 	ID: ResolverTypeWrapper<Scalars['ID']>;
 	Book: ResolverTypeWrapper<Book>;
-	Int: ResolverTypeWrapper<Scalars['Int']>;
 	Mutation: ResolverTypeWrapper<{}>;
 	Subscription: ResolverTypeWrapper<{}>;
 	CacheControlScope: CacheControlScope;
@@ -221,15 +242,17 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
 	Query: {};
 	Boolean: Scalars['Boolean'];
+	String: Scalars['String'];
+	Document: Document;
+	Image: Image;
+	Int: Scalars['Int'];
 	Header: Header;
 	NavigationSection: NavigationSection;
-	String: Scalars['String'];
 	MLOKey: Scalars['MLOKey'];
 	NavigationSectionElement: NavigationSectionElement;
 	Footer: Footer;
 	ID: Scalars['ID'];
 	Book: Book;
-	Int: Scalars['Int'];
 	Mutation: {};
 	Subscription: {};
 	CacheControlScope: CacheControlScope;
@@ -264,6 +287,15 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 	name: 'Date';
 }
 
+export type DocumentResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['Document'] = ResolversParentTypes['Document']
+> = {
+	title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+	teaser_image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType>;
+	markdown_content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
 export type FooterResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Footer'] = ResolversParentTypes['Footer']
@@ -276,6 +308,16 @@ export type HeaderResolvers<
 	ParentType extends ResolversParentTypes['Header'] = ResolversParentTypes['Header']
 > = {
 	sections?: Resolver<Array<ResolversTypes['NavigationSection']>, ParentType, ContextType>;
+};
+
+export type ImageResolvers<
+	ContextType = any,
+	ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']
+> = {
+	url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+	height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+	width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+	alt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export interface MloKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['MLOKey'], any> {
@@ -314,6 +356,7 @@ export type QueryResolvers<
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
 	_?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+	getDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, QueryGetDocumentArgs>;
 	getHeaderNavigation?: Resolver<ResolversTypes['Header'], ParentType, ContextType>;
 	getFooterNavigation?: Resolver<ResolversTypes['Footer'], ParentType, ContextType>;
 	getNavigationSection?: Resolver<
@@ -346,8 +389,10 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = any> = {
 	Book?: BookResolvers<ContextType>;
 	Date?: GraphQLScalarType;
+	Document?: DocumentResolvers<ContextType>;
 	Footer?: FooterResolvers<ContextType>;
 	Header?: HeaderResolvers<ContextType>;
+	Image?: ImageResolvers<ContextType>;
 	MLOKey?: GraphQLScalarType;
 	Mutation?: MutationResolvers<ContextType>;
 	NavigationSection?: NavigationSectionResolvers<ContextType>;
