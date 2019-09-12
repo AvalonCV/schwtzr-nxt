@@ -1,4 +1,3 @@
-![Welt des Wissens.](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_201277/image.png?version=7 "Welt des Wissens.")
 
 Klassische + innovative Lösungen für Bibliotheken
 =================================================

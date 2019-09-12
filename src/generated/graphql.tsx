@@ -58,7 +58,7 @@ export type Header = {
 
 export type Image = {
 	__typename?: 'Image';
-	url: Scalars['String'];
+	src: Scalars['String'];
 	height?: Maybe<Scalars['Int']>;
 	width?: Maybe<Scalars['Int']>;
 	alt?: Maybe<Scalars['String']>;
@@ -130,6 +130,14 @@ export type Subscription = {
 	_?: Maybe<Scalars['Boolean']>;
 };
 
+export type GetDocumentDataQueryVariables = {
+	identifier?: Maybe<Scalars['String']>;
+};
+
+export type GetDocumentDataQuery = { __typename?: 'Query' } & {
+	getDocument: Maybe<{ __typename?: 'Document' } & DocumentPropertiesFragment>;
+};
+
 export type GetFooterDataQueryVariables = {};
 
 export type GetFooterDataQuery = { __typename?: 'Query' } & {
@@ -149,6 +157,12 @@ export type GetFooterDataQuery = { __typename?: 'Query' } & {
 		>;
 	};
 };
+
+export type DocumentPropertiesFragment = { __typename?: 'Document' } & Pick<Document, 'title' | 'markdown_content'> & {
+		teaser_image: Maybe<{ __typename?: 'Image' } & ImagePropertiesFragment>;
+	};
+
+export type ImagePropertiesFragment = { __typename?: 'Image' } & Pick<Image, 'src' | 'height' | 'width' | 'alt'>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -314,7 +328,7 @@ export type ImageResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']
 > = {
-	url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+	src?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 	height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 	width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 	alt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

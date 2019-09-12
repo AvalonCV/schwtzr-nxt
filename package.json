@@ -17,6 +17,7 @@
 		"@apollo/react-components": "^3.1.0",
 		"@apollo/react-hoc": "^3.1.0",
 		"@apollo/react-hooks": "^3.1.0",
+		"@apollo/react-ssr": "^3.1.0",
 		"@types/lodash": "^4.14.138",
 		"apollo-cache-inmemory": "^1.6.3",
 		"apollo-client": "^2.6.4",
@@ -38,6 +39,7 @@
 		"react-fela": "^10.6.1",
 		"react-helmet-async": "^1.0.3",
 		"react-i18next": "^10.12.4",
+		"react-markdown": "^4.2.2",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1",
 		"webpack": "^4.39.3",
@@ -87,7 +89,7 @@
 		"ts-node": "^8.3.0",
 		"tslint": "^5.20.0",
 		"typescript": "^3.6.3",
-		"webpack-bundle-analyzer": "^3.4.1",
+		"webpack-bundle-analyzer": "^3.5.0",
 		"webpack-cli": "^3.3.8"
 	},
 	"prettier": {

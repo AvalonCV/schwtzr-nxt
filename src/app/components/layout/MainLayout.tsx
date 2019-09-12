@@ -12,6 +12,8 @@ import { MainLayoutFooter } from './MainLayoutFooter';
 import { Switch, Route } from 'react-router';
 import { Link } from './../elements/Link';
 
+import { Document } from '../EditorialContent/Document';
+
 interface MainLayoutProps {}
 interface MainLayoutState {}
 
@@ -39,8 +41,7 @@ const header_content_styles: IStyle = {
 
 const main_styles: IStyle = {
 	maxWidth: '1280px',
-	margin: '0 auto',
-	backgroundColor: 'gray'
+	margin: '0 auto'
 };
 
 const header_menu_items = [
@@ -80,19 +81,19 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 				</FelaComponent>
 			</FelaComponent>,
 			<FelaComponent key="main" as="main" style={main_styles}>
-				<DrawPicture image={teaser_image} />
-				Main and more?
 				<Switch>
 					<Route path="/gtc">
-						<span>
-							GTC <Link to="/">zu Haupt</Link>
-						</span>
+						<div>
+							GTC <Link to="/">zu Hauptseite</Link>
+							<Document />
+						</div>
 					</Route>
 					<Route path="/">
-						<span>
-							Haupt
+						<div>
+							<DrawPicture image={teaser_image} />
+							Main and more?
 							<Link to="/gtc">zu GTC</Link>
-						</span>
+						</div>
 					</Route>
 				</Switch>
 				{this.props.children}

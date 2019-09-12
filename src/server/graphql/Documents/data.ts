@@ -11,10 +11,9 @@ export const documents: DocumentData = {
 	services_for_libraries: {
 		title: 'Serviceseite Bibliotheken',
 		teaser_image: {
-			url:
-				'https://content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_201277/image.png?version=7',
-			height: 221,
-			width: 810
+			src: 'https://www.rluk.ac.uk/wp-content/uploads/2014/07/Bristol-WML-2.jpg',
+			width: 1442,
+			height: 518
 		},
 		markdown_content: services_for_libraries_markdown
 	},

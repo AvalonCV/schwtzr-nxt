@@ -7,3 +7,11 @@ type Document {
 	teaser_image: Image
 	markdown_content: String!
 }
+
+fragment DocumentProperties on Document {
+	title
+	teaser_image {
+		...ImageProperties
+	}
+	markdown_content
+}

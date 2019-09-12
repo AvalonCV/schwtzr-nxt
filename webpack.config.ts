@@ -107,7 +107,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			]
 		},
 		plugins: [],
-		watchOptions: { poll: 2000 }
+		watchOptions: { poll: 2000, aggregateTimeout: 500 }
 	};
 
 	return [

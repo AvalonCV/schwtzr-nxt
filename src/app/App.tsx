@@ -38,7 +38,7 @@ export class App extends React.PureComponent<AppProps, AppState> {
 							<HelmetProvider context={this.props.react_helmet_context}>
 								<Helmet>
 									<title>B2B Panda</title>
-									<meta name="description" content="Le Content" />
+									<meta name="description" content="Lé Content" />
 								</Helmet>
 								<MainLayout>
 									<div>Hello &amp; Welcome....</div>

@@ -7,7 +7,7 @@ import { App } from './../app/App';
 
 import { ApolloClient } from 'apollo-client';
 import { SchemaLink } from 'apollo-link-schema';
-import { renderToStringWithData } from 'react-apollo';
+import { renderToStringWithData } from '@apollo/react-ssr';
 import { gql_schema } from './graphql/index';
 
 // import { useSSR } from 'react-i18next';
@@ -126,7 +126,7 @@ export default function serverRenderer() {
 							<body>
 								<div class="main_root" id="root">${content}</div>
 								<script>
-									window.__APOLLO_STATE__ = ${JSON.stringify(apollo_client.extract())}
+									window.__APOLLO_STATE__ = ${JSON.stringify(apollo_client.extract()).replace(/</g, '\\u003c')}
 								</script>
 								${getWebpackScriptAssets(res)}
 							</body>

@@ -1,6 +1,7 @@
 type Image {
-	url: String!
+	src: String!
 	height: Int
 	width: Int
 	alt: String
 }
+
