@@ -7,6 +7,7 @@ import serverRenderer from './../serverRenderer';
 export const initExpressServer = () => {
 	const app = express();
 	app.disable('x-powered-by');
+	app.use(compression());
 	return app;
 };
 
@@ -17,7 +18,6 @@ export const initForProduction = (app: express.Express, public_path: string) => 
 		immutable: true
 	};
 
-	app.use(compression());
 	app.use(public_path + 'images/', express.static('dist/images', static_file_options));
 	app.use(public_path + 'fonts/', express.static('dist/fonts', static_file_options));
 	app.use(public_path, express.static('dist/client'));

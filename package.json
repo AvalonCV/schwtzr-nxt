@@ -42,7 +42,7 @@
 		"react-markdown": "^4.2.2",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1",
-		"webpack": "^4.39.3",
+		"webpack": "^4.40.0",
 		"webpack-dev-middleware": "^3.7.1",
 		"webpack-hot-middleware": "^2.25.0",
 		"webpack-hot-server-middleware": "^0.6.0",

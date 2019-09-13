@@ -6,8 +6,8 @@ import { IStyle } from 'fela';
 
 interface Image {
 	src: string;
-	width: number;
-	height: number;
+	width?: number;
+	height?: number;
 }
 
 interface ImageProperties {
@@ -32,11 +32,14 @@ const getPictureStyles: (height: number, width: number) => NestedStyle = (height
 export const DrawPicture: React.StatelessComponent<ImageProperties> = (props: ImageProperties) => {
 	const { image, additional_styles, alt = 'No description :(', title } = props;
 
-	const picture_styles = { ...getPictureStyles(image.height, image.width), ...additional_styles };
-
-	return (
-		<FelaComponent as="picture" style={picture_styles}>
-			<img alt={alt} title={title} src={image.src} height={image.height} width={image.width} />
-		</FelaComponent>
-	);
+	if (image.height && image.height > 0 && image.width && image.width > 0) {
+		const picture_styles = { ...getPictureStyles(image.height, image.width), ...additional_styles };
+		return (
+			<FelaComponent as="picture" style={picture_styles}>
+				<img alt={alt} title={title} src={image.src} height={image.height} width={image.width} />
+			</FelaComponent>
+		);
+	} else {
+		return <img alt={alt} title={title} src={image.src} height={image.height} width={image.width} />;
+	}
 };
