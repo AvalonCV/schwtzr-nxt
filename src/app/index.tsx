@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { createRenderer } from 'fela';
 import { media_query_order } from './styles/fela';
 // import { rehydrate } from 'fela-dom';
+
 import { i18n_instance } from './localisation/instance';
 
 import { ApolloClient } from 'apollo-client';
@@ -15,7 +16,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 
 const is_production = process.env.NODE_ENV === 'production';
-const rela_renderer = createRenderer({ devMode: !is_production, mediaQueryOrder: media_query_order });
+const fela_renderer = createRenderer({ devMode: !is_production, mediaQueryOrder: media_query_order });
 // check if this is client-side rendering (ME: should not be necessary in this file!)
 // if (typeof window !== 'undefined' && window.document && window.document.createElement) {
 // 	rehydrate(rela_renderer);
@@ -37,8 +38,8 @@ const apollo_client = new ApolloClient({
 ReactDOM.hydrate(
 	<App
 		apollo_client={apollo_client}
-		fela_renderer={rela_renderer}
-		i18n_instance={i18n_instance}
+		fela_renderer={fela_renderer}
+		i18n={i18n_instance}
 		RouterComponent={BrowserRouter}
 		router_props={{}}
 	/>,

@@ -3,29 +3,31 @@ import React from 'react';
 import { IRenderer } from 'fela';
 import { RendererProvider } from 'react-fela';
 
+import * as i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
 
 import { MainLayout } from './components/layout/MainLayout';
-import i18next from 'i18next';
 
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 
 import { StaticRouterProps } from 'react-router';
 import { BrowserRouterProps } from 'react-router-dom';
+import { ScrollToTopOnRouteChange } from './components/elements/ScrollToTop';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 interface AppProps {
 	fela_renderer: IRenderer;
-	i18n_instance: i18next.i18n;
 	apollo_client: ApolloClient<unknown>;
 	RouterComponent: React.ComponentType;
 	router_props: StaticRouterProps | BrowserRouterProps;
 	react_helmet_context?: {};
+	i18n: i18next.default.i18n;
 	// tslint:disable-next-line: no-any
 	[key: string]: any;
 }
+
 interface AppState {}
 
 export class App extends React.PureComponent<AppProps, AppState> {
@@ -34,12 +36,15 @@ export class App extends React.PureComponent<AppProps, AppState> {
 			<ApolloProvider client={this.props.apollo_client}>
 				<RendererProvider renderer={this.props.fela_renderer}>
 					<this.props.RouterComponent {...this.props.router_props}>
-						<I18nextProvider i18n={this.props.i18n_instance}>
+						{/* tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945
+							breaks this code (i18n 'only' has reportNamespaces as property)) */}
+						<I18nextProvider i18n={this.props.i18n as any}>
 							<HelmetProvider context={this.props.react_helmet_context}>
 								<Helmet>
 									<title>B2B Panda</title>
 									<meta name="description" content="Lé Content" />
 								</Helmet>
+								<ScrollToTopOnRouteChange />
 								<MainLayout>
 									<div>Hello &amp; Welcome....</div>
 								</MainLayout>

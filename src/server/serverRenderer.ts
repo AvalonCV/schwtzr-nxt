@@ -7,6 +7,7 @@ import { App } from './../app/App';
 
 import { ApolloClient } from 'apollo-client';
 import { SchemaLink } from 'apollo-link-schema';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { renderToStringWithData } from '@apollo/react-ssr';
 import { gql_schema } from './graphql/index';
 
@@ -18,7 +19,6 @@ import { renderToMarkup } from 'fela-dom';
 import { media_query_order } from '../app/styles/fela';
 import { corecss } from './../shared/css/core.css';
 import normalizecss from './../shared/css/normalize.css';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 // import { i18n_instance } from '../app/localisation/instance';
 
 import { StaticRouter } from 'react-router';
@@ -100,7 +100,8 @@ export default function serverRenderer() {
 				const getReactApp = () => {
 					return React.createElement(App, {
 						fela_renderer: fela_renderer,
-						i18n_instance: req.i18n,
+						// tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945 breaks this)
+						i18n: req.i18n as any,
 						apollo_client: apollo_client,
 						RouterComponent: StaticRouter,
 						router_props: { location: req.path, context: router_context },

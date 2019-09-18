@@ -4,7 +4,7 @@ import { FelaComponent } from 'react-fela';
 import { NestedStyle } from '../../styles/fela';
 import { IStyle } from 'fela';
 
-interface Image {
+export interface Image {
 	src: string;
 	width?: number;
 	height?: number;
@@ -29,7 +29,7 @@ const getPictureStyles: (height: number, width: number) => NestedStyle = (height
 	};
 };
 
-export const DrawPicture: React.StatelessComponent<ImageProperties> = (props: ImageProperties) => {
+export const DrawPicture: React.FunctionComponent<ImageProperties> = (props: ImageProperties) => {
 	const { image, additional_styles, alt = 'No description :(', title } = props;
 
 	if (image.height && image.height > 0 && image.width && image.width > 0) {

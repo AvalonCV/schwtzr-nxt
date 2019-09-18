@@ -17,21 +17,21 @@ Nutzen Sie die Vielfalt der Schweitzer E-Book-Services für Bibliotheken: Transp
 Schweitzer E-Book Forum | Save the Date: 28. November 2019
 ----------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_281372/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_281372/image.png?version=7 =122x108)
 
 Seien Sie beim 9. Schweitzer E-Book Forum dabei und erfahren Sie aus erster Hand spannende Neuentwicklungen in der Bibliotheksbranche. Unter dem Motto "Nutzerorientiert!" bieten wir Ihnen sechs Fachvorträge rund um die Themen "Wissenschaftliche Bibliotheken 2025", "E-Rechnungsverordnung" und "Nachhaltigkeit des EBS Modells" an. Das 9. Schweitzer E-Book Forum findet am Donnerstag, 28. November 2019, in den Räumlichkeiten der Katholischen Akademie in Hamburg statt. [Mehr erfahren ...](https://www.schweitzer-online.de/info/E-Book-Forum/ "Mehr erfahren ...")
 
 Exklusive Fachvorträge – Countdown zur E-Rechnungsverordnung
 ------------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_355815/image.jpg?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_355815/image.jpg?version=7 "fancy alt")
 
 Melden Sie sich jetzt kostenlos zu einem unserer Fachvorträge an und informieren Sie sich über ZuGFeRD und XRechnungen. Im Anschluss an den erkenntnisreichen Vortrag der beiden Referenten Andrea de Groot und Gerd Mogler haben Sie die Möglichkeit, sich mit anderen Institutionen auszutauschen und Fragen zu stellen. Erfahren Sie jetzt, wie Sie die E-Rechnungsverordnung bis 27. November 2020 umsetzen können. [Weitere Informationen und Termine ...](https://www.schweitzer-online.de/info/E-Rechnungsverordnung/ "Weitere Informationen und Termine ...")
 
 Schweitzer Newsletter-Formate für Bibliotheken
 ----------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_356432/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_356432/image.png?version=7 "even better alt" =122x108)
 
 Sie möchten regelmäßig über die aktuellen Angebote der wissenschaftlichen Verlage informiert sein? Sie sind neugierig, welche Veranstaltungen Schweitzer Fachinformationen für Bibliothekarinnen und Bibliothekare? Und es ist Ihnen wichtig, schnell von den Neuerungen bei den Open Access-Programmen von Knowledge Unlatched zu erfahren? Dann wählen Sie jetzt Ihre persönlichen Wunschnewsletter aus. [Mehr erfahren ...](https://www.schweitzer-online.de/info/Schweitzer-Newsletter-fuer-Bibliotheken/ "Mehr erfahren ...")
 

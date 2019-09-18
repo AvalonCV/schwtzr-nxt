@@ -1,13 +1,13 @@
 import React from 'react';
-const ReactMarkdown = require('react-markdown');
 
 import { useQuery } from '@apollo/react-hooks';
 import getDocumentDataQuery from './getDocumentData.gql';
 import { GetDocumentDataQuery, GetDocumentDataQueryVariables } from '../../../generated/graphql';
 
 import { DrawPicture } from '../elements/Image';
+import { RenderMarkdown } from '../elements/Markdown';
 
-export const Document: React.StatelessComponent = (_props: object) => {
+export const Document: React.FunctionComponent = (_props: object) => {
 	// const { t } = useTranslation();
 
 	const identifier = 'services_for_libraries';
@@ -35,7 +35,7 @@ export const Document: React.StatelessComponent = (_props: object) => {
 			<div>
 				<h1>{data.getDocument.title}</h1>
 				{image && <DrawPicture image={image} alt={alt} />}
-				<ReactMarkdown source={data.getDocument.markdown_content} />
+				<RenderMarkdown source={data.getDocument.markdown_content} />
 			</div>
 		);
 	} else if (loading) {

@@ -1,5 +1,6 @@
 import express from 'express';
 import i18n from 'i18next';
+
 import { initReactI18next, useSSR } from 'react-i18next';
 import i18nextMiddleware from 'i18next-express-middleware';
 import { translations } from './../../shared/localisation/translations';
@@ -29,7 +30,8 @@ export async function createLocalisationInstance(app: express.Express, initial_l
 			return i18next_instance.changeLanguage('de');
 		})
 		.then(() => {
-			app.use(i18nextMiddleware.handle(i18next_instance));
+			// tslint:disable-next-line: no-any
+			app.use(i18nextMiddleware.handle(i18next_instance as any));
 			return app;
 		});
 }

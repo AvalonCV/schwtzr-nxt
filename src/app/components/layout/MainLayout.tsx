@@ -82,6 +82,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			</FelaComponent>,
 			<FelaComponent key="main" as="main" style={main_styles}>
 				<Switch>
+					<Route path="/document/:identifier" component={Document} />
 					<Route path="/gtc">
 						<div>
 							GTC <Link to="/">zu Hauptseite</Link>
