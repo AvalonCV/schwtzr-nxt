@@ -5,7 +5,7 @@ import { NestedStyle } from '../../styles/fela';
 
 import { DrawPicture } from '../elements/Image';
 import logo from './../../images/schweitzer_logo_white.svg';
-import teaser_image from './../../images/image_teaser_woman.gimp2.jpg';
+import teaser_image from './../../images/image_teaser_woman.gimp2.84.jpg';
 
 import { MainLayoutFooter } from './MainLayoutFooter';
 

@@ -61,7 +61,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{
-							loader: 'image-size-loader',
+							// loader: 'image-size-loader',
+							loader: 'loader-probe-image-size',
 							options: {
 								context: path.resolve(__dirname, 'src'),
 								outputPath: 'images',

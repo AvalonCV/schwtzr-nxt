@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
+import { useFela } from 'react-fela';
+
 import { Image, DrawPicture } from './Image';
+import { NestedStyle } from '../../styles/fela';
 
 interface CustomMarkdownProperties {
 	source: string;
@@ -31,14 +34,32 @@ function imageRenderer({ src, ...props }: Image) {
 	return <DrawPicture image={image} {...props} />;
 }
 
+const styles: { [element_key: string]: NestedStyle } = {
+	container: {
+		maxWidth: '96%',
+		width: '768px',
+		marginLeft: 'auto',
+		marginRight: 'auto'
+	},
+	paragraph: {
+		textAlign: 'justify',
+		hyphens: 'auto',
+		marginTop: '0.5em',
+		marginBottom: '0.75em'
+	}
+};
+
 export const RenderMarkdown: React.StatelessComponent<ReactMarkdown.ReactMarkdownProps & CustomMarkdownProperties> = ({
 	source,
 	...props
 }) => {
 	source = imagePreprocessor(source);
 
+	const { css } = useFela();
+
 	return (
 		<ReactMarkdown
+			className={css(styles.container)}
 			source={source}
 			skipHtml={true}
 			renderers={{
@@ -52,7 +73,7 @@ export const RenderMarkdown: React.StatelessComponent<ReactMarkdown.ReactMarkdow
 					) {
 						return renderer_props.children;
 					} else {
-						return <p {...renderer_props} />;
+						return <p className={css(styles.paragraph)} {...renderer_props} />;
 					}
 				}
 			}}
