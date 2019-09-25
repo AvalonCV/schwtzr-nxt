@@ -109,7 +109,7 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			<FelaComponent key="header" as="header" style={header_styles}>
 				<FelaComponent as="div" style={header_content_styles}>
 					<div>
-						<Link to="/">
+						<Link to="/" style={{ display: 'inline-block', maxWidth: '40%' }}>
 							<DrawPicture image={logo} />
 						</Link>
 
