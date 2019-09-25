@@ -39,10 +39,14 @@ const footer_styles: NestedStyle = {
 	color: 'white',
 	minHeight: '480px',
 	boxSizing: 'border-box',
-	padding: '3em 1em 1em 40px',
+	paddingTop: '3em',
+	paddingRight: '1em',
+	paddingBottom: '1em',
+	paddingLeft: '1em',
 	borderTopLeftRadius: '40px',
 	'@media (min-width:1280px)': {
 		marginLeft: 'calc((100% - 1280px) / 2)',
+		paddingLeft: '40px',
 		paddingRight: 'calc((100% - 1280px) / 2 + 1em)'
 	}
 };
@@ -235,7 +239,7 @@ const footer_navigation: Navigation = [
 	}
 ];
 
-export const MainLayoutFooter: React.StatelessComponent = (_props: object) => {
+export const MainLayoutFooter: React.FunctionComponent = (_props: object) => {
 	const { t } = useTranslation();
 
 	const { loading, error, data } = useQuery<GetFooterDataQuery>(getFooterQueryDocument);

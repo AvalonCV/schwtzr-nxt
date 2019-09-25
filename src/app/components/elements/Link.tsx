@@ -8,7 +8,7 @@ type LinkProperties<S = {}> = LinkProps<S> & {
 	style?: NestedStyle;
 };
 
-export const Link: React.StatelessComponent<LinkProperties> = ({
+export const Link: React.FunctionComponent<LinkProperties> = ({
 	children,
 	className,
 	style,

@@ -17,21 +17,31 @@ interface CustomMarkdownProperties {
 
 const imageSizeRegex = /_33B2BF251EFD_([0-9]+x|x[0-9]+|[0-9]+x[0-9]+)$/;
 const imagePreprocessor = (source: string) => {
-	return source.replace(/(!\[[^\]]*\]\([^)\s]+) =([0-9]+x|x[0-9]+|[0-9]+x[0-9]+)\)/g, '$1_33B2BF251EFD_$2)');
+	// return source.replace(/(!\[[^\]]*\]\([^)\s]+) =([0-9]+x|x[0-9]+|[0-9]+x[0-9]+)\)/g, '$1_33B2BF251EFD_$2)');
+	return source.replace(
+		/(!\[[^\]]*\]\([^)\s]+) =([0-9]+x|x[0-9]+|[0-9]+x[0-9]+(?:\s.*?)?)\)/g,
+		'$1_33B2BF251EFD_$2)'
+	);
 };
 
 function imageRenderer({ src, ...props }: Image) {
 	const match = imageSizeRegex.exec(src);
 	const image: Image = { src };
+	const additional_styles: NestedStyle = {};
 
 	if (match) {
 		const [width, height] = match[1].split('x').map(s => (s === '' ? undefined : Number(s)));
 		image.src = image.src.replace(imageSizeRegex, '');
 		image.width = width;
 		image.height = height;
+
+		if (typeof image.width === 'number' && image.width <= 200) {
+			additional_styles.float = 'left';
+			additional_styles.marginRight = '1em';
+		}
 	}
 
-	return <DrawPicture image={image} {...props} />;
+	return <DrawPicture image={image} additional_styles={additional_styles} {...props} />;
 }
 
 const styles: { [element_key: string]: NestedStyle } = {
@@ -49,7 +59,7 @@ const styles: { [element_key: string]: NestedStyle } = {
 	}
 };
 
-export const RenderMarkdown: React.StatelessComponent<ReactMarkdown.ReactMarkdownProps & CustomMarkdownProperties> = ({
+export const RenderMarkdown: React.FunctionComponent<ReactMarkdown.ReactMarkdownProps & CustomMarkdownProperties> = ({
 	source,
 	...props
 }) => {

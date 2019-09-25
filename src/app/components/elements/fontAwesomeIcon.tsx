@@ -60,12 +60,11 @@ const getFontAwesomeIconStyles: ({  }: GetFontAwesomeIconStyleProps) => NestedSt
 	};
 };
 
-export const FontAwesomeIcon: React.StatelessComponent<FontAwesomeIconProps> = (props: FontAwesomeIconProps) => {
+export const FontAwesomeIcon: React.FunctionComponent<FontAwesomeIconProps> = (props: FontAwesomeIconProps) => {
 	let { icon, type, ...rest } = props;
 	if (typeof icon === 'object') {
 		type = type || icon.type;
 		icon = icon.icon;
-	} else {
 	}
 
 	return (

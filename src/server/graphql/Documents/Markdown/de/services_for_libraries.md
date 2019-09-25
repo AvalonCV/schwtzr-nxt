@@ -31,7 +31,7 @@ Melden Sie sich jetzt kostenlos zu einem unserer Fachvorträge an und informiere
 Schweitzer Newsletter-Formate für Bibliotheken
 ----------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_356432/image.png?version=7 "even better alt" =122x108)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_356432/image.png?version=7 =122x108 "even better alt")
 
 Sie möchten regelmäßig über die aktuellen Angebote der wissenschaftlichen Verlage informiert sein? Sie sind neugierig, welche Veranstaltungen Schweitzer Fachinformationen für Bibliothekarinnen und Bibliothekare? Und es ist Ihnen wichtig, schnell von den Neuerungen bei den Open Access-Programmen von Knowledge Unlatched zu erfahren? Dann wählen Sie jetzt Ihre persönlichen Wunschnewsletter aus. [Mehr erfahren ...](https://www.schweitzer-online.de/info/Schweitzer-Newsletter-fuer-Bibliotheken/ "Mehr erfahren ...")
 
