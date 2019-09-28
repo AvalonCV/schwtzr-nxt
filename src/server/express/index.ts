@@ -14,7 +14,7 @@ export const initExpressServer = () => {
 export const initForProduction = (app: express.Express, public_path: string) => {
 	const static_file_options: serveStatic.ServeStaticOptions = {
 		etag: false,
-		maxAge: 1000 * 60 * 24 * 30, // one month?
+		maxAge: 1000 * 60 * 60 * 24 * 30, // one month?
 		immutable: true
 	};
 
