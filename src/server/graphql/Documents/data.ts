@@ -15,7 +15,8 @@ export const documents: DocumentData = {
 		teaser_image: {
 			src: services_for_libraries_image.src,
 			width: services_for_libraries_image.width,
-			height: services_for_libraries_image.height
+			height: services_for_libraries_image.height,
+			placeholder: services_for_libraries_image.placeholder
 		},
 		markdown_content: services_for_libraries_markdown
 	},

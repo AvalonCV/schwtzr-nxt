@@ -3,5 +3,5 @@ type Image {
 	height: Int
 	width: Int
 	alt: String
+	placeholder: String
 }
-

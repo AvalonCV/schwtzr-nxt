@@ -62,6 +62,7 @@ export type Image = {
 	height?: Maybe<Scalars['Int']>;
 	width?: Maybe<Scalars['Int']>;
 	alt?: Maybe<Scalars['String']>;
+	placeholder?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -162,7 +163,10 @@ export type DocumentPropertiesFragment = { __typename?: 'Document' } & Pick<Docu
 		teaser_image: Maybe<{ __typename?: 'Image' } & ImagePropertiesFragment>;
 	};
 
-export type ImagePropertiesFragment = { __typename?: 'Image' } & Pick<Image, 'src' | 'height' | 'width' | 'alt'>;
+export type ImagePropertiesFragment = { __typename?: 'Image' } & Pick<
+	Image,
+	'src' | 'height' | 'width' | 'alt' | 'placeholder'
+>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -332,6 +336,7 @@ export type ImageResolvers<
 	height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 	width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 	alt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	placeholder?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export interface MloKeyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['MLOKey'], any> {

@@ -61,12 +61,13 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{
-							// loader: 'image-size-loader',
+							// loader-probe-image-size
 							loader: 'sharp-responsive-multi-image-loader',
 							options: {
 								context: path.resolve(__dirname, 'src'),
 								outputPath: 'images',
-								name: 'images/[name].[hash:7].[ext]'
+								name: 'images/[name].[hash:7].[ext]',
+								name_prefix: 'images/[name].[hash:7]'
 							}
 						}
 					]
@@ -107,7 +108,9 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 				}
 			]
 		},
-		plugins: [],
+		plugins: [
+			/*new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false })*/
+		],
 		watchOptions: { poll: 2000, aggregateTimeout: 500 }
 	};
 

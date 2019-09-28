@@ -26,8 +26,9 @@ export const Document: React.FunctionComponent = (_props: object) => {
 		if (data.getDocument.teaser_image) {
 			image = {
 				src: data.getDocument.teaser_image.src,
-				height: data.getDocument.teaser_image.height || 1,
-				width: data.getDocument.teaser_image.width || 1
+				height: data.getDocument.teaser_image.height || undefined,
+				width: data.getDocument.teaser_image.width || undefined,
+				placeholder: data.getDocument.teaser_image.placeholder || undefined
 			};
 		}
 

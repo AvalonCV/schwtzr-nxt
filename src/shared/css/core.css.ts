@@ -122,6 +122,15 @@ picture > img {
 	left: 0;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 /* We put links around almost everything, but its */
 
