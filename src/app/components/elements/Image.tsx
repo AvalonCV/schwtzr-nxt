@@ -16,6 +16,7 @@ export interface Image {
 	src: string;
 	width?: number;
 	height?: number;
+	type?: string;
 	placeholder?: string;
 	responsive_images?: ResponsiveImage[];
 }
@@ -97,21 +98,35 @@ export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (prop
 			});
 		}
 
+		let responsive_attributes = undefined;
+		if (image.type) {
+			const index = responsive_image_types.indexOf(image.type);
+			if (index > -1) {
+				responsive_image_types.splice(index, 1);
+
+				responsive_attributes = buildSourceSetAndSizes(
+					responsive_images.filter(responsive_image => image.type === responsive_image.type)
+				);
+			}
+		}
+
 		return (
 			<picture className={css({ ...styles.picture, ...additional_styles })}>
 				{image.responsive_images &&
-					image.responsive_images.length &&
-					responsive_image_types.reverse().map((type, index) => {
+					responsive_image_types.length &&
+					responsive_image_types.map((type, index) => {
 						const { srcset, sizes } = buildSourceSetAndSizes(
 							responsive_images.filter(responsive_image => type === responsive_image.type)
 						);
 
-						return <source srcSet={srcset} sizes={sizes} key={index} type={type.replace('ì', 'i')} />;
+						return <source srcSet={srcset} sizes={sizes} key={index} type={type} />;
 					})}
 				<img
 					alt={alt}
 					title={title}
 					src={image.src}
+					srcSet={responsive_attributes && responsive_attributes.srcset}
+					sizes={responsive_attributes && responsive_attributes.sizes}
 					height={image.height}
 					width={image.width}
 					className={css(styles.image)}
