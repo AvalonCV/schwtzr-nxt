@@ -1,5 +1,7 @@
 import React from 'react';
 
+import max from 'lodash/max';
+
 import { useFela } from 'react-fela';
 import { NestedStyle } from '../../styles/fela';
 import { IStyle } from 'fela';
@@ -15,7 +17,7 @@ export interface Image {
 	width?: number;
 	height?: number;
 	placeholder?: string;
-	reponsive_images?: ResponsiveImage[];
+	responsive_images?: ResponsiveImage[];
 }
 
 interface ImageProperties {
@@ -59,6 +61,24 @@ const getStyles: (
 	return styles;
 };
 
+const buildSourceSetAndSizes: (
+	images: ResponsiveImage[],
+	original_size?: number
+) => { srcset: string; sizes: string | undefined } = (images, _original_size) => {
+	const srcset_image = images
+		.sort((a, b) => a.width - b.width)
+		.map(image => {
+			return `${image.src} ${image.width}w`;
+		});
+	const max_width = max(images.map(image => image.width));
+	const sizes = `(max-width: ${max_width}px) 100vw, ${max_width}px`;
+
+	return {
+		srcset: srcset_image.join(', '),
+		sizes: sizes
+	};
+};
+
 export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (props: ImageProperties) => {
 	const { css } = useFela(props);
 	const { image, additional_styles, alt = 'No description :(', title } = props;
@@ -66,8 +86,28 @@ export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (prop
 	if (image.height && image.height > 0 && image.width && image.width > 0) {
 		const styles = getStyles(image.height, image.width, image.placeholder);
 
+		const responsive_image_types: string[] = [];
+		const { responsive_images = [] } = image;
+
+		if (responsive_images.length) {
+			responsive_images.forEach(responsive_image => {
+				if (responsive_image_types.indexOf(responsive_image.type) === -1) {
+					responsive_image_types.push(responsive_image.type);
+				}
+			});
+		}
+
 		return (
 			<picture className={css({ ...styles.picture, ...additional_styles })}>
+				{image.responsive_images &&
+					image.responsive_images.length &&
+					responsive_image_types.reverse().map((type, index) => {
+						const { srcset, sizes } = buildSourceSetAndSizes(
+							responsive_images.filter(responsive_image => type === responsive_image.type)
+						);
+
+						return <source srcSet={srcset} sizes={sizes} key={index} type={type.replace('ì', 'i')} />;
+					})}
 				<img
 					alt={alt}
 					title={title}
