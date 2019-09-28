@@ -23,7 +23,7 @@ interface AppProps {
 	RouterComponent: React.ComponentType;
 	router_props: StaticRouterProps | BrowserRouterProps;
 	react_helmet_context?: {};
-	i18n: i18next.default.i18n;
+	i18n: i18next.i18n;
 	// tslint:disable-next-line: no-any
 	[key: string]: any;
 }
@@ -38,7 +38,7 @@ export class App extends React.PureComponent<AppProps, AppState> {
 					<this.props.RouterComponent {...this.props.router_props}>
 						{/* tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945
 							breaks this code (i18n 'only' has reportNamespaces as property)) */}
-						<I18nextProvider i18n={this.props.i18n as any}>
+						<I18nextProvider i18n={this.props.i18n}>
 							<HelmetProvider context={this.props.react_helmet_context}>
 								<Helmet>
 									<title>B2B Panda</title>

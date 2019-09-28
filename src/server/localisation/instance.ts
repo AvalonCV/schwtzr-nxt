@@ -30,8 +30,7 @@ export async function createLocalisationInstance(app: express.Express, initial_l
 		// 	return i18next_instance.changeLanguage('de');
 		// })
 		.then(() => {
-			// tslint:disable-next-line: no-any
-			app.use(i18nextMiddleware.handle(i18next_instance as any));
+			app.use(i18nextMiddleware.handle(i18next_instance));
 			return app;
 		});
 }

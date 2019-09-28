@@ -100,8 +100,7 @@ export default function serverRenderer() {
 				const getReactApp = () => {
 					return React.createElement(App, {
 						fela_renderer: fela_renderer,
-						// tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945 breaks this)
-						i18n: req.i18n as any,
+						i18n: req.i18n,
 						apollo_client: apollo_client,
 						RouterComponent: StaticRouter,
 						router_props: { location: req.path, context: router_context },
