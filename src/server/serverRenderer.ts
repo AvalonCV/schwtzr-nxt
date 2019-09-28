@@ -118,7 +118,7 @@ export default function serverRenderer() {
 								<meta charset="utf-8">
 								<meta http-equiv="X-UA-Compatible" content="IE=edge">
 								<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-								<meta name="theme-color" content="#000000">
+								<meta name="theme-color" content="#1d3c8d">
 
 								${renderToMarkup(fela_renderer)}
 								${(helmet_context.helmet && helmet_context.helmet.title.toString()) || '<title>Test</title>'}

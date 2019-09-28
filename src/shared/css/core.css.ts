@@ -8,7 +8,7 @@ export const corecss = `
 	font-family: 'Univers';
 	font-style: normal;
 	font-weight: 400;
-	font-display: auto;
+	font-display: swap;
 	src: url("${UniversLight}") format("woff2");
 }
 
@@ -16,7 +16,7 @@ export const corecss = `
 	font-family: 'Univers';
 	font-style: italic;
 	font-weight: 400;
-	font-display: auto;
+	font-display: swap;
 	src: url("${UniversLightOblique}") format("woff2");
 }
 
@@ -24,7 +24,7 @@ export const corecss = `
 	font-family: 'Univers';
 	font-style: normal;
 	font-weight: 700;
-	font-display: auto;
+	font-display: swap;
 	src: url("${UniversRoman}") format("woff2");
 }
 

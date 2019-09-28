@@ -19,6 +19,10 @@ interface ImageProperties {
 	max_height?: number;
 }
 
+type PictureComponentProps = ImageProperties & {
+	[additional: string]: unknown;
+};
+
 const getPictureStyles: (height: number, width: number) => NestedStyle = (height: number, width: number) => {
 	/* some global 'img & picture' styles are defined in core.css(.ts) */
 	return {
@@ -29,7 +33,7 @@ const getPictureStyles: (height: number, width: number) => NestedStyle = (height
 	};
 };
 
-export const DrawPicture: React.FunctionComponent<ImageProperties> = (props: ImageProperties) => {
+export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (props: ImageProperties) => {
 	const { image, additional_styles, alt = 'No description :(', title } = props;
 
 	if (image.height && image.height > 0 && image.width && image.width > 0) {

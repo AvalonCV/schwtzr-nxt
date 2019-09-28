@@ -9,6 +9,7 @@ export interface Navigation {
 
 export interface NavigationSection {
 	section_key: string;
+	icon?: FontAwesomeIcon | FontAwesomeIconName;
 	headline_mlo_key?: TranslationItemKey;
 	description_mlo_key?: TranslationItemKey;
 	elements: NavigationSectionElements[];
@@ -31,6 +32,7 @@ export const navigations: Navigation[] = [
 		sections: [
 			{
 				section_key: 'header_main',
+				icon: 'bars',
 				elements: [
 					{ name_mlo_key: 'header.navigation.new_releases' },
 					{ name_mlo_key: 'header.navigation.ebooks' },
@@ -40,6 +42,38 @@ export const navigations: Navigation[] = [
 					{ name_mlo_key: 'header.navigation.magazines' },
 					{ name_mlo_key: 'header.navigation.contact' }
 				]
+			},
+			{
+				section_key: 'watchlist',
+				icon: 'star',
+				elements: []
+			},
+			{
+				section_key: 'user_home',
+				headline_mlo_key: 'header.user_menu.name',
+				icon: 'user',
+				elements: [
+					{ name_mlo_key: 'header.user_menu.addresses' },
+					{ name_mlo_key: 'header.user_menu.quotation_history' },
+					{ name_mlo_key: 'header.user_menu.order_history' },
+					{ name_mlo_key: 'header.user_menu.company_settings' },
+					{ name_mlo_key: 'header.user_menu.company_master_data' },
+					{ name_mlo_key: 'header.user_menu.publication_notice' },
+					{ name_mlo_key: 'header.user_menu.settings' },
+					{ name_mlo_key: 'header.user_menu.master_data' },
+					{ name_mlo_key: 'header.user_menu.employees' },
+					{ name_mlo_key: 'header.user_menu.password' },
+					{ name_mlo_key: 'header.user_menu.master_cart' },
+					{ name_mlo_key: 'header.user_menu.master_cart_history' },
+					{ name_mlo_key: 'header.user_menu.mediacenter', icon: 'cube' },
+					{ name_mlo_key: 'header.user_menu.connect', icon: 'fire' },
+					{ name_mlo_key: 'header.user_menu.logout' }
+				]
+			},
+			{
+				section_key: 'cart',
+				icon: 'shopping-cart',
+				elements: []
 			}
 		]
 	},
