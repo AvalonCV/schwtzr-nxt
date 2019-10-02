@@ -7,10 +7,13 @@ import { GetDocumentDataQuery, GetDocumentDataQueryVariables } from '../../../ge
 import { DrawPicture } from '../elements/Image';
 import { RenderMarkdown } from '../elements/Markdown';
 
+import { useParams } from 'react-router';
+import { Status } from '../elements/HTTPStatus';
+
 export const Document: React.FunctionComponent = (_props: object) => {
 	// const { t } = useTranslation();
 
-	const identifier = 'services_for_libraries';
+	const { identifier } = useParams();
 	const { loading, error, data } = useQuery<GetDocumentDataQuery, GetDocumentDataQueryVariables>(
 		getDocumentDataQuery,
 		{
@@ -44,6 +47,10 @@ export const Document: React.FunctionComponent = (_props: object) => {
 	} else if (error) {
 		return <div>Error: {error}</div>;
 	} else {
-		return <div>null?</div>;
+		return (
+			<Status status={404}>
+				<div>Document not found</div>
+			</Status>
+		);
 	}
 };

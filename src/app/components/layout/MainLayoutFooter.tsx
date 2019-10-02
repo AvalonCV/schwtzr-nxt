@@ -9,6 +9,7 @@ import { TranslationItemKey } from '../../../shared/localisation/translations';
 import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
 
 import { Link } from './../elements/Link';
+import { LocationDescriptor, Location } from 'history';
 
 import { useQuery } from '@apollo/react-hooks';
 import getFooterQueryDocument from './Footer/getFooterNavigation.gql';
@@ -27,6 +28,7 @@ interface NavigationSection {
 interface NavigationSectionElements {
 	icon?: FontAwesomeIcon | FontAwesomeIconName;
 	name_mlo_key: TranslationItemKey;
+	href?: string | LocationDescriptor | Location;
 	description_mlo_key?: TranslationItemKey;
 	show_as_highlight?: boolean;
 	additional_styles?: NestedStyle;
@@ -52,7 +54,11 @@ const footer_styles: NestedStyle = {
 };
 
 const footer_section_list_styles: NestedStyle = {
-	textAlign: 'justify'
+	textAlign: 'justify',
+	fontSize: '87.5%',
+	'@media (min-width:640px)': {
+		fontSize: '100%'
+	}
 };
 
 const footer_section_list_item_styles: NestedStyle = {
@@ -215,7 +221,7 @@ const footer_navigation: Navigation = [
 			{ name_mlo_key: 'footer_target_audience.lawyers.name' },
 			{ name_mlo_key: 'footer_target_audience.tax_consultants.name' },
 			{ name_mlo_key: 'footer_target_audience.companies.name' },
-			{ name_mlo_key: 'footer_target_audience.libraries.name' },
+			{ name_mlo_key: 'footer_target_audience.libraries.name', href: '/document/services_for_libraries' },
 			{ name_mlo_key: 'footer_target_audience.communes.name' },
 			{ name_mlo_key: 'footer_target_audience.students.name' }
 		]
@@ -233,7 +239,7 @@ const footer_navigation: Navigation = [
 			{ name_mlo_key: 'footer_company.contact.name' },
 			{ name_mlo_key: 'footer_company.data_privacy.name' },
 			{ name_mlo_key: 'footer_company.gtac.name' },
-			{ name_mlo_key: 'footer_company.right_of_withdrawal.name' },
+			{ name_mlo_key: 'footer_company.right_of_withdrawal.name', href: '/document/right_of_withdrawal' },
 			{ name_mlo_key: 'footer_company.imprint.name' }
 		]
 	}
@@ -280,7 +286,12 @@ export const MainLayoutFooter: React.FunctionComponent = (_props: object) => {
 												additional_styles={footer_element_icon_styles}
 											/>
 										)}
-										{getMLOText(t, element.name_mlo_key)}
+
+										{element.href ? (
+											<Link to={element.href}>{getMLOText(t, element.name_mlo_key)}</Link>
+										) : (
+											getMLOText(t, element.name_mlo_key)
+										)}
 									</FelaComponent>
 									{element.description_mlo_key && (
 										<FelaComponent as="span" style={footer_element_description_styles}>

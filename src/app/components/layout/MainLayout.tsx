@@ -13,6 +13,7 @@ import { MainLayoutFooter } from './MainLayoutFooter';
 
 import { Switch, Route } from 'react-router';
 import { Link } from './../elements/Link';
+import { Status } from './../elements/HTTPStatus';
 
 import { Document } from '../EditorialContent/Document';
 
@@ -130,19 +131,18 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			<FelaComponent key="main" as="main" style={main_styles}>
 				<Switch>
 					<Route path="/document/:identifier" component={Document} />
-					<Route path="/gtc">
-						<div>
-							GTC <Link to="/">zu Hauptseite</Link>
-							<Document />
-						</div>
-					</Route>
-					<Route path="/">
+					<Route exact path="/">
 						<div>
 							<DrawPicture image={teaser_image} />
-							Main and more?
-							<Link to="/gtc">zu GTC</Link>
+							<Link to="/document/services_for_libraries">zu GTC</Link>
+							<br />
+							<br />
+							<Link to="/document/right_of_withdrawal">zu ROW</Link>
 						</div>
 					</Route>
+					<Status status={404}>
+						<div>Sorry, not found</div>
+					</Status>
 				</Switch>
 				{this.props.children}
 			</FelaComponent>,

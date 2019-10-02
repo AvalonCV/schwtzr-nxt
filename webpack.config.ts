@@ -58,6 +58,18 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					]
 				},
 				{
+					test: /favicon\.(gif|jpeg|jpg|png|svg)$/,
+					use: [
+						{
+							loader: 'favicon-loader',
+							options: {
+								context: path.resolve(__dirname, 'src'),
+								outputPath: 'images'
+							}
+						}
+					]
+				},
+				{
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{

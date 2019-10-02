@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { minify } from 'html-minifier';
 
 import React from 'react';
@@ -21,7 +21,7 @@ import { corecss } from './../shared/css/core.css';
 import normalizecss from './../shared/css/normalize.css';
 // import { i18n_instance } from '../app/localisation/instance';
 
-import { StaticRouter } from 'react-router';
+import { StaticRouter, StaticContext } from 'react-router';
 
 import { FilledContext } from 'react-helmet-async';
 
@@ -47,7 +47,7 @@ const getWebpackScriptAssets = (res: Response) => {
 	const assets: string[] = [];
 
 	if (is_production) {
-		assets.push('/public/js/client.js');
+		assets.push('public/js/client.js');
 	} else {
 		const webpackStats: webpack.Stats[] = res.locals.webpackStats.stats;
 
@@ -71,7 +71,7 @@ const getWebpackScriptAssets = (res: Response) => {
 	return assets
 		.map(
 			(path, _index, array) =>
-				`<script type="text/javascript" src="${path}" ${array.length === 1 ? 'async' : 'defer'}></script>`
+				`<script type="text/javascript" src="/${path}" ${array.length === 1 ? 'async' : 'defer'}></script>`
 		)
 		.join('\n');
 };
@@ -79,38 +79,35 @@ const getWebpackScriptAssets = (res: Response) => {
 type EventuallyFilledContext = Partial<FilledContext>;
 
 export default function serverRenderer() {
-	return function(req: Request, res: Response, _next: any) {
-		switch (req.path) {
-			case '/':
-			case '/gtc':
-				const fela_renderer = createRenderer({
-					mediaQueryOrder: media_query_order,
-					devMode: !is_production
-				});
-				fela_renderer.renderStatic(normalizecss + ' ' + corecss);
+	return function(req: Request, res: Response, _next: NextFunction) {
+		const fela_renderer = createRenderer({
+			mediaQueryOrder: media_query_order,
+			devMode: !is_production
+		});
+		fela_renderer.renderStatic(normalizecss + ' ' + corecss);
 
-				const apollo_client = new ApolloClient({
-					ssrMode: true,
-					link: new SchemaLink({ schema: gql_schema }),
-					cache: new InMemoryCache()
-				});
+		const apollo_client = new ApolloClient({
+			ssrMode: true,
+			link: new SchemaLink({ schema: gql_schema }),
+			cache: new InMemoryCache()
+		});
 
-				const router_context = {};
-				const helmet_context: EventuallyFilledContext = {};
-				const getReactApp = () => {
-					return React.createElement(App, {
-						fela_renderer: fela_renderer,
-						i18n: req.i18n,
-						apollo_client: apollo_client,
-						RouterComponent: StaticRouter,
-						router_props: { location: req.path, context: router_context },
-						react_helmet_context: helmet_context
-					});
-				};
+		const router_context: StaticContext = {};
+		const helmet_context: EventuallyFilledContext = {};
+		const getReactApp = () => {
+			return React.createElement(App, {
+				fela_renderer: fela_renderer,
+				i18n: req.i18n,
+				apollo_client: apollo_client,
+				RouterComponent: StaticRouter,
+				router_props: { location: req.path, context: router_context },
+				react_helmet_context: helmet_context
+			});
+		};
 
-				renderToStringWithData(getReactApp())
-					.then((content: string) => {
-						const response = `
+		renderToStringWithData(getReactApp())
+			.then((content: string) => {
+				const response = `
 							<!DOCTYPE html>
 							<html lang="en">
 							<head>
@@ -133,30 +130,25 @@ export default function serverRenderer() {
 							</html>
 						`;
 
-						// res.status(200).send(response);
-						res.status(200).send(
-							minify(response, {
-								collapseWhitespace: true,
-								minifyJS: false,
-								minifyCSS: {
-									/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
-									compatibility: {
-										properties: {
-											colors: false,
-											merging: false
-										}
-									}
+				// res.status(200).send(response);
+				res.status(router_context.statusCode || 200).send(
+					minify(response, {
+						collapseWhitespace: true,
+						minifyJS: false,
+						minifyCSS: {
+							/* try to disable any optimizations: FELA is not going to re-hydrate them correctly if anything has changed */
+							compatibility: {
+								properties: {
+									colors: false,
+									merging: false
 								}
-							})
-						);
+							}
+						}
 					})
-					.catch(error => {
-						res.status(503).send(error.message);
-					});
-				break;
-
-			default:
-				res.status(404).send();
-		}
+				);
+			})
+			.catch(error => {
+				res.status(503).send(error.message);
+			});
 	};
 }
