@@ -14,7 +14,10 @@ import { gql_schema } from './graphql/index';
 // import { useSSR } from 'react-i18next';
 // import { translations } from './../shared/localisation/translations';
 
-import favicon_html from './../app/images/favicon.png';
+import favicon from './../app/images/favicon.png';
+import x from './../app/images/schweitzer_logo_white.svg';
+// tslint:disable-next-line: no-any
+const favicon_elements: any = favicon || [x];
 
 import { createRenderer } from 'fela';
 import { renderToMarkup } from 'fela-dom';
@@ -119,7 +122,13 @@ export default function serverRenderer() {
 								<meta http-equiv="X-UA-Compatible" content="IE=edge">
 								<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 								<meta name="theme-color" content="#1d3c8d">
-								${favicon_html || ''}
+
+								${favicon_elements.join('') ||
+									`
+								<meta name="theme-color" content="#1d3c8d"><link rel="shortcut icon" href="/images/favicons/favicon.ico">
+								<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+								<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">`}
+
 
 								${renderToMarkup(fela_renderer)}
 								${(helmet_context.helmet && helmet_context.helmet.title.toString()) || '<title>Test</title>'}
