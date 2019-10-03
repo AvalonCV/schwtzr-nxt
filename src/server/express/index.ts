@@ -3,13 +3,11 @@ import serveStatic from 'serve-static';
 import compression from 'compression';
 
 import serverRenderer from './../serverRenderer';
-// import favicon from './../../app/images/favicon.png';
 
 export const initExpressServer = () => {
 	const app = express();
 	app.disable('x-powered-by');
 	app.use(compression());
-	// app.locals.favicon = favicon;
 	return app;
 };
 

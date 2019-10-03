@@ -2,6 +2,24 @@ import path from 'path';
 import webpack from 'webpack';
 import WebpackNodeExternals from 'webpack-node-externals';
 
+import WebappWebpackPlugin from 'webapp-webpack-plugin';
+const favicon_plugin = new WebappWebpackPlugin({
+	logo: path.resolve(process.cwd(), 'src/app/images/favicon.png'),
+	inject: false,
+	prefix: 'images/favicons',
+	favicons: {
+		icons: {
+			android: false,
+			appleIcon: false,
+			appleStartup: false,
+			coast: false,
+			firefox: false,
+			windows: false,
+			yandex: false
+		}
+	}
+});
+
 // // type Modify<T, R> = Pick<T, Exclude<keyof T, keyof R>> & R;
 // // type MyWebpackConfiguration = Modify<
 // // 	webpack.Configuration,
@@ -38,6 +56,7 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 		devtool: is_production ? 'source-map' : 'cheap-module-eval-source-map',
 		output: {
 			filename: '',
+			libraryTarget: 'commonjs2',
 			// path needs to be an ABSOLUTE file path
 			path: path.resolve(process.cwd(), 'dist'),
 			publicPath: is_production ? '/public/' : '/'
@@ -58,19 +77,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 					]
 				},
 				{
-					test: /favicon\.(gif|jpeg|jpg|png|svg)$/,
-					use: [
-						{
-							loader: 'favicon-loader',
-							options: {
-								context: path.resolve(__dirname, 'src'),
-								outputPath: 'images'
-							}
-						}
-					]
-				},
-				{
 					test: /\.(gif|jpeg|jpg|png|svg)$/,
+					exclude: /favicon\.(gif|jpeg|jpg|png|svg)$/,
 					use: [
 						{
 							// loader-probe-image-size
@@ -84,6 +92,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 						}
 					]
 				},
+				// loader for favicons - returns html
+				favicon_plugin.rule(),
 				{
 					test: /\.woff2?$/,
 					use: [
@@ -136,9 +146,9 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			target: 'node',
 			output: {
 				...base.output,
-				filename: 'server/js/server.js',
-				libraryTarget: 'commonjs2'
-			}
+				filename: 'server/js/server.js'
+			},
+			plugins: [...base.plugins, favicon_plugin]
 		},
 		{
 			// client-specific configuration
