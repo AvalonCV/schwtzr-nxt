@@ -14,8 +14,8 @@ import { gql_schema } from './graphql/index';
 // import { useSSR } from 'react-i18next';
 // import { translations } from './../shared/localisation/translations';
 
-import favicon from './../app/images/favicon.png';
 import x from './../app/images/schweitzer_logo_white.svg';
+import favicon from './../app/images/favicon.png';
 // tslint:disable-next-line: no-any
 const favicon_elements: any = favicon || [x];
 
