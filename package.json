@@ -96,6 +96,9 @@
 		"webpack-bundle-analyzer": "^3.5.2",
 		"webpack-cli": "^3.3.9"
 	},
+	"engines": {
+		"node": "12.10.0"
+	},
 	"prettier": {
 		"singleQuote": true,
 		"printWidth": 120,
