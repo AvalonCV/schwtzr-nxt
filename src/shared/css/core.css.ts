@@ -174,4 +174,15 @@ h5,
 h6 {
 	margin: 0;
 }
+
+@media (max-width:640px) {
+	h1 {font-size: 1.25em}
+	h2 {font-size: 1.1em}
+	h3,
+	h4,
+	h5 {
+		font-size: 1em
+	}
+}
+
 `;

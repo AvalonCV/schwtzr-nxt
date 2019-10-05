@@ -24,7 +24,7 @@ Seien Sie beim 9. Schweitzer E-Book Forum dabei und erfahren Sie aus erster Hand
 Exklusive Fachvorträge – Countdown zur E-Rechnungsverordnung
 ------------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_355815/image.jpg?version=7 "fancy alt")
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_355815/image.jpg?version=7 =123x123 "fancy alt")
 
 Melden Sie sich jetzt kostenlos zu einem unserer Fachvorträge an und informieren Sie sich über ZuGFeRD und XRechnungen. Im Anschluss an den erkenntnisreichen Vortrag der beiden Referenten Andrea de Groot und Gerd Mogler haben Sie die Möglichkeit, sich mit anderen Institutionen auszutauschen und Fragen zu stellen. Erfahren Sie jetzt, wie Sie die E-Rechnungsverordnung bis 27. November 2020 umsetzen können. [Weitere Informationen und Termine ...](https://www.schweitzer-online.de/info/E-Rechnungsverordnung/ "Weitere Informationen und Termine ...")
 
@@ -38,43 +38,35 @@ Sie möchten regelmäßig über die aktuellen Angebote der wissenschaftlichen Ve
 Wall Street Journal (WSJ) – für Universitäten und Hochschulen
 -------------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344143/image.png?version=7)
-
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344146/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344143/image.png?version=7 =128x72)
 
 Warum WSJ für Ihre Hochschule? Wenn Ihre Studierenden die Welt verändern wollen, müssen sie über Lehrbücher hinausdenken. Geben Sie ihnen die Einblicke in die Praxis, die sie benötigen. Am Membership-Programm teilnehmende Universitäten und Hochschulen ermöglichen ihren Studierenden den Zugriff auf die kompletten Inhalte des Wall Street Journal (WSJ): aktuelle Nachrichten und Einblicke in die reale Welt des Business, der Wirtschafts- und Finanzwelt sowie von Märkten und Unternehmen. [Mehr erfahren ...](https://www.schweitzer-online.de/info/Wall-Street-Journal/ "Mehr erfahren ...")
 
 McGraw-Hill Education – Datenbanken für Ingenieurwissenschaften und Biomedizin
 ------------------------------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344312/image.png?version=7)
-
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344315/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344312/image.png?version=7 =128x128)
 
 McGraw-Hill Education (MHE) ist einer der großen internationalen Bildungsverlage - hochinnovativ und mit langer Tradition. Publiziert werden qualitativ hochwertige Lehr- und Lernlösungen für die Hochschulausbildung: im Fachgebiet Ingenieurwissenschaften beispielsweise die beiden Datenbanken AccessEngineering und AccessScience; im interdisziplinären Fachgebiet Biomedizin die Datenbank AccessBiomedical Science. Der Vertrieb an Bibliotheken in Deutschland erfolgt (fast) exklusiv über Schweitzer Fachinformationen. [Mehr erfahren ...](https://www.schweitzer-online.de/info/McGraw-Hill/ "Mehr erfahren ...")
 
 McGraw-Hill Education – eBook Library
 -------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344380/image.png?version=7)
-
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344383/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344380/image.png?version=7 =128x128)
 
 Die McGraw-Hill eBook Library umfasst über 4.700 Titel. Vierteljährlich kommen neue E-Books hinzu. Wählen Sie zwischen dem Subskriptions-Modell (1-Jahres-Subskription) und dem Kauf-Modell. Beim Kaufmodell erwerben Bibliotheken E-Books als Campuslizenz zur unbegrenzten gleichzeitigen Nutzung, inklusive Remote Access. Ein inhaltlicher Schwerpunkt der McGraw-Hill eBook Library liegt im Bereich Wirtschaft: Über 2.000 E-Books sind zum Themengebiet Business verfügbar. Der Vertrieb an Bibliotheken in Deutschland erfolgt (fast) exklusiv über Schweitzer Fachinformationen. [Mehr erfahren ...](https://www.schweitzer-online.de/info/McGraw-Hill-eBook-Library/ "Mehr erfahren ...")
 
 KU Select 2019 – 343 neue HSS- und 48 neue STEM-Bücher
 ------------------------------------------------------
 
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344119/image.png?version=7)
-
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344122/image.png?version=7)
+![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_344119/image.png?version=7 =128x118)
 
 Es ist soweit: Knowledge Unlatched (KU), die zentrale Finanzierungsplattform für Open Access (OA), hat ihre sechste Finanzierungsrunde eröffnet. Im Mittelpunkt steht das Angebot KU Select 2019 mit nahezu 400 Büchern. Darüber hinaus bietet KU siebzehn weitere Projekte, wie Romance Studies und Intech Open Engineering, an. [Mehr erfahren ...](https://www.schweitzer-online.de/info/Knowledge-Unlatched/ "Mehr erfahren ...")
 
 ProQuest Ebook Central: 1,2 Millionen E-Books – davon 127.000 Titel DRM-frei nutzbar
 ------------------------------------------------------------------------------------
 
-[![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_217538/image.png?version=7)](https://www.schweitzer-online.de/info/ProQuest-Ebook-Central/)
+[![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_217538/image.png?version=7 =140x130)](https://www.schweitzer-online.de/info/ProQuest-Ebook-Central/)
 
 1,2 Millionen E-Books sind aktuell auf der Plattform Ebook Central verfügbar. Davon sind bereits 127.000 Titel ohne DRM-Beschränkung auf der Plattform nutzbar. Und die Zahl der DRM-freien Titel auf Ebook Central wächst. Vielleicht hat Ihre Bibliothek bereits Unlimited Access-Lizenzen dieser Titel erworben? Die E-Books werden automatisch upgegradet und sind DRM-frei nutzbar. Auch deutschsprachige Verlage nehmen mit einer großen Titelauswahl bei der ProQuest-Initiative DRM-frei teil – neben De Gruyter auch zahlreiche der von Schweitzer Fachinformationen für Ebook Central aggregierten Verlage. [Mehr erfahren ...](https://www.schweitzer-online.de/info/ProQuest-Ebook-Central/ "Mehr erfahren ...")
 
@@ -107,5 +99,3 @@ PDA für Printmedien
 -------------------
 
 Wie können wissenschaftliche Bibliotheken die besonderen Fachliteraturwünsche ihrer Nutzer angemessen berücksichtigen? Das Erwerbungsmodell PDA (Patron Driven Acquisition / Nutzergesteuerte Erwerbung) macht es möglich. Die vom Nutzer ausgewählten Titel werden zielgerichtet erworben und zur Verfügung gestellt. Für den Erwerb von E-Books hat sich das PDA-Modell bei vielen Bibliotheken längst bewährt und etabliert. Und, das Modell des nutzergesteuerten Erwerbs kann auch auf die nachfrageorientierte Beschaffung von Print-Titeln übertragen werden. Damit können Bibliotheken den Wünschen ihrer Nutzer hohe Priorität einräumen. Wir zeigen Ihnen gerne, wie's funktioniert.
-
-![](//content.schweitzer-online.de/static/content/uploads/StoreFront/contentItem/87637/snippet_206255/image.png?version=7)

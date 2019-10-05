@@ -8,6 +8,7 @@ const favicon_plugin = new WebappWebpackPlugin({
 	inject: false,
 	prefix: 'images/favicons',
 	favicons: {
+		theme_color: '##1d3c8d',
 		icons: {
 			android: true,
 			appleIcon: false,
