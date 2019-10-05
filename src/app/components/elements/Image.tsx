@@ -28,6 +28,7 @@ interface ImageProperties {
 	title?: string;
 	max_width?: number;
 	max_height?: number;
+	sizes_max_width?: number;
 }
 
 type PictureComponentProps = ImageProperties & {
@@ -64,14 +65,14 @@ const getStyles: (
 
 const buildSourceSetAndSizes: (
 	images: ResponsiveImage[],
-	original_size?: number
-) => { srcset: string; sizes: string | undefined } = (images, _original_size) => {
+	sizes_max_width?: number
+) => { srcset: string; sizes: string | undefined } = (images, sizes_max_width) => {
 	const srcset_image = images
 		.sort((a, b) => a.width - b.width)
 		.map(image => {
 			return `${image.src} ${image.width}w`;
 		});
-	const max_width = max(images.map(image => image.width));
+	const max_width = sizes_max_width || max(images.map(image => image.width));
 	const sizes = `(max-width: ${max_width}px) 100vw, ${max_width}px`;
 
 	return {
@@ -105,7 +106,8 @@ export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (prop
 				responsive_image_types.splice(index, 1);
 
 				responsive_attributes = buildSourceSetAndSizes(
-					responsive_images.filter(responsive_image => image.type === responsive_image.type)
+					responsive_images.filter(responsive_image => image.type === responsive_image.type),
+					props.sizes_max_width
 				);
 			}
 		}
@@ -116,7 +118,8 @@ export const DrawPicture: React.FunctionComponent<PictureComponentProps> = (prop
 					responsive_image_types.length &&
 					responsive_image_types.map((type, index) => {
 						const { srcset, sizes } = buildSourceSetAndSizes(
-							responsive_images.filter(responsive_image => type === responsive_image.type)
+							responsive_images.filter(responsive_image => type === responsive_image.type),
+							props.sizes_max_width
 						);
 
 						return <source srcSet={srcset} sizes={sizes} key={index} type={type} />;

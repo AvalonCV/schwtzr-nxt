@@ -1,51 +1,42 @@
 import React from 'react';
 
-import { useQuery } from '@apollo/react-hooks';
 import getDocumentDataQuery from './getDocumentData.gql';
 import { GetDocumentDataQuery, GetDocumentDataQueryVariables } from '../../../generated/graphql';
 
 import { DrawPicture } from '../elements/Image';
 import { RenderMarkdown } from '../elements/Markdown';
 
-import { useParams } from 'react-router';
 import { Status } from '../elements/HTTPStatus';
+import { asPage } from '../Pages/asPage';
 
-export const Document: React.FunctionComponent = (_props: object) => {
-	// const { t } = useTranslation();
+interface DocumentContentProperties {
+	data: GetDocumentDataQuery;
+}
 
-	const { identifier } = useParams();
-	const { loading, error, data } = useQuery<GetDocumentDataQuery, GetDocumentDataQueryVariables>(
-		getDocumentDataQuery,
-		{
-			variables: {
-				identifier: identifier
-			}
-		}
-	);
+interface DocumentRouteParameters {
+	identifier: string;
+}
 
-	if (data && data.getDocument) {
+const DocumentContent: React.FunctionComponent<DocumentContentProperties> = props => {
+	if (props.data && props.data.getDocument) {
 		let image = undefined;
 		let alt = '';
-		if (data.getDocument.teaser_image) {
+		if (props.data.getDocument.teaser_image) {
 			image = {
-				src: data.getDocument.teaser_image.src,
-				height: data.getDocument.teaser_image.height || undefined,
-				width: data.getDocument.teaser_image.width || undefined,
-				placeholder: data.getDocument.teaser_image.placeholder || undefined
+				src: props.data.getDocument.teaser_image.src,
+				height: props.data.getDocument.teaser_image.height || undefined,
+				width: props.data.getDocument.teaser_image.width || undefined,
+				placeholder: props.data.getDocument.teaser_image.placeholder || undefined
 			};
 		}
 
 		return (
 			<div>
-				<h1>{data.getDocument.title}</h1>
-				{image && <DrawPicture image={image} alt={alt} />}
-				<RenderMarkdown source={data.getDocument.markdown_content} />
+				<h1>{props.data.getDocument.title}</h1>
+				{image && <DrawPicture image={image} alt={alt} sizes_max_width={1280} />}
+				<RenderMarkdown source={props.data.getDocument.markdown_content} />
 			</div>
 		);
-	} else if (loading) {
-		return <div>Still loading</div>;
-	} else if (error) {
-		return <div>Error: {error}</div>;
 	} else {
 		return (
 			<Status status={404}>
@@ -54,3 +45,29 @@ export const Document: React.FunctionComponent = (_props: object) => {
 		);
 	}
 };
+
+export const DocumentPage = asPage<GetDocumentDataQuery, GetDocumentDataQueryVariables, DocumentRouteParameters>(
+	DocumentContent,
+	{
+		getQueryData: route_params => {
+			return {
+				query: getDocumentDataQuery,
+				variables: { identifier: route_params.identifier }
+			};
+		},
+		getPageTitle: data => {
+			return (data.getDocument && data.getDocument.title) || 'No title found';
+		},
+		getMetaData: data => {
+			return data.getDocument && data.getDocument.title
+				? [
+						{
+							name: 'description',
+							content: data.getDocument.title
+						}
+						// tslint:disable-next-line: indent
+				  ]
+				: [];
+		}
+	}
+);

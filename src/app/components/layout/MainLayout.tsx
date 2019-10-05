@@ -15,7 +15,7 @@ import { Switch, Route } from 'react-router';
 import { Link } from './../elements/Link';
 import { Status } from './../elements/HTTPStatus';
 
-import { Document } from '../EditorialContent/Document';
+import { DocumentPage } from '../EditorialContent/Document';
 
 interface MainLayoutProps {}
 interface MainLayoutState {}
@@ -130,10 +130,10 @@ export class MainLayout extends React.PureComponent<MainLayoutProps, MainLayoutS
 			</FelaComponent>,
 			<FelaComponent key="main" as="main" style={main_styles}>
 				<Switch>
-					<Route path="/document/:identifier" component={Document} />
+					<Route path="/document/:identifier" component={DocumentPage} />
 					<Route exact path="/">
 						<div>
-							<DrawPicture image={teaser_image} />
+							<DrawPicture image={teaser_image} sizes_max_width={1280} />
 							<Link to="/document/services_for_libraries">zu GTC</Link>
 							<br />
 							<br />

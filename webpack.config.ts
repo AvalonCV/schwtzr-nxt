@@ -9,7 +9,7 @@ const favicon_plugin = new WebappWebpackPlugin({
 	prefix: 'images/favicons',
 	favicons: {
 		icons: {
-			android: false,
+			android: true,
 			appleIcon: false,
 			appleStartup: false,
 			coast: false,
@@ -56,7 +56,6 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 		devtool: is_production ? 'source-map' : 'cheap-module-eval-source-map',
 		output: {
 			filename: '',
-			libraryTarget: 'commonjs2',
 			// path needs to be an ABSOLUTE file path
 			path: path.resolve(process.cwd(), 'dist'),
 			publicPath: is_production ? '/public/' : '/'
@@ -146,7 +145,8 @@ export default function(env: CustomProcessEnv = process.env, _argv: any): Custom
 			target: 'node',
 			output: {
 				...base.output,
-				filename: 'server/js/server.js'
+				filename: 'server/js/server.js',
+				libraryTarget: 'commonjs2'
 			},
 			plugins: [...base.plugins, favicon_plugin]
 		},
