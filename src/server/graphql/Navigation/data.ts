@@ -1,6 +1,20 @@
-import { FontAwesomeIcon, FontAwesomeIconName } from '../../../app/components/elements/fontAwesomeIcon';
 import { NestedStyle } from '../../../app/styles/fela';
 import { TranslationItemKey } from '../../../shared/localisation/translations';
+
+import { FontAwesomeIconDefinition } from 'fontawesome-webfont-react-fela';
+import { faBarsSolid } from 'fontawesome-webfont-react-fela/dist/icon/faBars';
+import { faStarRegular } from 'fontawesome-webfont-react-fela/dist/icon/faStar';
+import { faUserRegular } from 'fontawesome-webfont-react-fela/dist/icon/faUser';
+import { faShoppingCartSolid } from 'fontawesome-webfont-react-fela/dist/icon/faShoppingCart';
+import faCubes from 'fontawesome-webfont-react-fela/dist/icon/faCubes';
+import faFire from 'fontawesome-webfont-react-fela/dist/icon/faFire';
+import faGraduationCap from 'fontawesome-webfont-react-fela/dist/icon/faGraduationCap';
+import faComment from 'fontawesome-webfont-react-fela/dist/icon/faComment';
+import faLeaf from 'fontawesome-webfont-react-fela/dist/icon/faLeaf';
+import faTruck from 'fontawesome-webfont-react-fela/dist/icon/faTruck';
+import faThumbsUp from 'fontawesome-webfont-react-fela/dist/icon/faThumbsUp';
+import faCreditCard from 'fontawesome-webfont-react-fela/dist/icon/faCreditCard';
+import faNewspaper from 'fontawesome-webfont-react-fela/dist/icon/faNewspaper';
 
 export interface Navigation {
 	id: string;
@@ -9,7 +23,7 @@ export interface Navigation {
 
 export interface NavigationSection {
 	section_key: string;
-	icon?: FontAwesomeIcon | FontAwesomeIconName;
+	icon?: FontAwesomeIconDefinition;
 	headline_mlo_key?: TranslationItemKey;
 	description_mlo_key?: TranslationItemKey;
 	elements: NavigationSectionElements[];
@@ -18,7 +32,7 @@ export interface NavigationSection {
 }
 
 interface NavigationSectionElements {
-	icon?: FontAwesomeIcon | FontAwesomeIconName;
+	icon?: FontAwesomeIconDefinition;
 	name_mlo_key: TranslationItemKey;
 	description_mlo_key?: TranslationItemKey;
 	show_as_highlight?: boolean;
@@ -32,11 +46,11 @@ export const navigations: Navigation[] = [
 		sections: [
 			{
 				section_key: 'header_main',
-				icon: 'bars',
+				icon: faBarsSolid,
 				elements: [
 					{ name_mlo_key: 'header.navigation.new_releases' },
-					{ name_mlo_key: 'header.navigation.ebooks' },
 					{ name_mlo_key: 'header.navigation.databases' },
+					{ name_mlo_key: 'header.navigation.ebooks' },
 					{ name_mlo_key: 'header.navigation.elearning' },
 					{ name_mlo_key: 'header.navigation.loose_leaf' },
 					{ name_mlo_key: 'header.navigation.magazines' },
@@ -45,13 +59,13 @@ export const navigations: Navigation[] = [
 			},
 			{
 				section_key: 'watchlist',
-				icon: 'star',
+				icon: faStarRegular,
 				elements: []
 			},
 			{
 				section_key: 'user_home',
 				headline_mlo_key: 'header.user_menu.name',
-				icon: 'user',
+				icon: faUserRegular,
 				elements: [
 					{ name_mlo_key: 'header.user_menu.addresses' },
 					{ name_mlo_key: 'header.user_menu.quotation_history' },
@@ -65,14 +79,14 @@ export const navigations: Navigation[] = [
 					{ name_mlo_key: 'header.user_menu.password' },
 					{ name_mlo_key: 'header.user_menu.master_cart' },
 					{ name_mlo_key: 'header.user_menu.master_cart_history' },
-					{ name_mlo_key: 'header.user_menu.mediacenter', icon: 'cube' },
-					{ name_mlo_key: 'header.user_menu.connect', icon: 'fire' },
+					{ name_mlo_key: 'header.user_menu.mediacenter', icon: faCubes },
+					{ name_mlo_key: 'header.user_menu.connect', icon: faFire },
 					{ name_mlo_key: 'header.user_menu.logout' }
 				]
 			},
 			{
 				section_key: 'cart',
-				icon: 'shopping-cart',
+				icon: faShoppingCartSolid,
 				elements: []
 			}
 		]
@@ -85,43 +99,43 @@ export const navigations: Navigation[] = [
 				headline_mlo_key: 'footer_features.headline',
 				elements: [
 					{
-						icon: 'cubes',
+						icon: faCubes,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.top_selection.name',
 						description_mlo_key: 'footer_features.top_selection.description'
 					},
 					{
-						icon: 'graduation-cap',
+						icon: faGraduationCap,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.experience.name',
 						description_mlo_key: 'footer_features.experience.description'
 					},
 					{
-						icon: 'comment',
+						icon: faComment,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.personal_service.name',
 						description_mlo_key: 'footer_features.personal_service.description'
 					},
 					{
-						icon: 'leaf',
+						icon: faLeaf,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.sustainability.name',
 						description_mlo_key: 'footer_features.sustainability.description'
 					},
 					{
-						icon: 'truck',
+						icon: faTruck,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.fast_delivery.name',
 						description_mlo_key: 'footer_features.fast_delivery.description'
 					},
 					{
-						icon: 'thumbs-up',
+						icon: faThumbsUp,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.free_shipping.name',
 						description_mlo_key: 'footer_features.free_shipping.description'
 					},
 					{
-						icon: 'credit-card',
+						icon: faCreditCard,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_features.secure_payment.name',
 						description_mlo_key: 'footer_features.secure_payment.description'
@@ -139,7 +153,7 @@ export const navigations: Navigation[] = [
 					{ name_mlo_key: 'footer_services.publication_notice.name' },
 					{ name_mlo_key: 'footer_services.app_ios.name' },
 					{
-						icon: 'newspaper',
+						icon: faNewspaper,
 						show_as_highlight: true,
 						name_mlo_key: 'footer_services.newsletter.name',
 						description_mlo_key: 'footer_services.newsletter.description'

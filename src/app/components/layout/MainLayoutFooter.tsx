@@ -6,14 +6,21 @@ import { useTranslation } from 'react-i18next';
 import { getMLOText } from '../../localisation/getMLOText';
 import { TranslationItemKey } from '../../../shared/localisation/translations';
 
-import { FontAwesomeIcon, FontAwesomeIconName } from '../elements/fontAwesomeIcon';
+import { FontAwesomeIconDefinition, FontAwesomeIcon } from 'fontawesome-webfont-react-fela';
+import faCubes from 'fontawesome-webfont-react-fela/dist/icon/faCubes';
+import faGraduationCap from 'fontawesome-webfont-react-fela/dist/icon/faGraduationCap';
+import faComment from 'fontawesome-webfont-react-fela/dist/icon/faComment';
+import faLeaf from 'fontawesome-webfont-react-fela/dist/icon/faLeaf';
+import faTruck from 'fontawesome-webfont-react-fela/dist/icon/faTruck';
+import faThumbsUp from 'fontawesome-webfont-react-fela/dist/icon/faThumbsUp';
+import faCreditCard from 'fontawesome-webfont-react-fela/dist/icon/faCreditCard';
+import faNewspaper from 'fontawesome-webfont-react-fela/dist/icon/faNewspaper';
+import faFacebookSquare from 'fontawesome-webfont-react-fela/dist/icon/faFacebookSquare';
+import faTwitter from 'fontawesome-webfont-react-fela/dist/icon/faTwitter';
+import faYoutube from 'fontawesome-webfont-react-fela/dist/icon/faYoutube';
 
 import { Link } from './../elements/Link';
 import { LocationDescriptor, Location } from 'history';
-
-import { useQuery } from '@apollo/react-hooks';
-import getFooterQueryDocument from './Footer/getFooterNavigation.gql';
-import { GetFooterDataQuery } from '../../../generated/graphql';
 
 type Navigation = NavigationSection[];
 
@@ -26,7 +33,7 @@ interface NavigationSection {
 }
 
 interface NavigationSectionElements {
-	icon?: FontAwesomeIcon | FontAwesomeIconName;
+	icon?: FontAwesomeIconDefinition;
 	name_mlo_key: TranslationItemKey;
 	href?: string | LocationDescriptor | Location;
 	description_mlo_key?: TranslationItemKey;
@@ -120,43 +127,43 @@ const footer_navigation: Navigation = [
 		},
 		elements: [
 			{
-				icon: 'cubes',
+				icon: faCubes,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.top_selection.name',
 				description_mlo_key: 'footer_features.top_selection.description'
 			},
 			{
-				icon: 'graduation-cap',
+				icon: faGraduationCap,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.experience.name',
 				description_mlo_key: 'footer_features.experience.description'
 			},
 			{
-				icon: 'comment',
+				icon: faComment,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.personal_service.name',
 				description_mlo_key: 'footer_features.personal_service.description'
 			},
 			{
-				icon: 'leaf',
+				icon: faLeaf,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.sustainability.name',
 				description_mlo_key: 'footer_features.sustainability.description'
 			},
 			{
-				icon: 'truck',
+				icon: faTruck,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.fast_delivery.name',
 				description_mlo_key: 'footer_features.fast_delivery.description'
 			},
 			{
-				icon: 'thumbs-up',
+				icon: faThumbsUp,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.free_shipping.name',
 				description_mlo_key: 'footer_features.free_shipping.description'
 			},
 			{
-				icon: 'credit-card',
+				icon: faCreditCard,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_features.secure_payment.name',
 				description_mlo_key: 'footer_features.secure_payment.description'
@@ -174,7 +181,7 @@ const footer_navigation: Navigation = [
 			{ name_mlo_key: 'footer_services.publication_notice.name' },
 			{ name_mlo_key: 'footer_services.app_ios.name' },
 			{
-				icon: 'newspaper',
+				icon: faNewspaper,
 				show_as_highlight: true,
 				name_mlo_key: 'footer_services.newsletter.name',
 				description_mlo_key: 'footer_services.newsletter.description',
@@ -200,13 +207,13 @@ const footer_navigation: Navigation = [
 							}}
 						>
 							<Link to="https://de-de.facebook.com/schweitzer.social">
-								<FontAwesomeIcon key="facebook" icon="facebook-square" type="brands" />
+								<FontAwesomeIcon key="facebook" icon={faFacebookSquare} />
 							</Link>
 							<Link to="https://www.youtube.com/channel/UC7dRHcw83GaLrPjN-aZ_scg">
-								<FontAwesomeIcon key="youtube" icon="youtube" type="brands" />
+								<FontAwesomeIcon key="youtube" icon={faYoutube} />
 							</Link>
 							<Link to="https://twitter.com/SchweitzerInfo">
-								<FontAwesomeIcon key="twitter" icon="twitter" type="brands" />
+								<FontAwesomeIcon key="twitter" icon={faTwitter} />
 							</Link>
 						</FelaComponent>
 					);
@@ -247,8 +254,6 @@ const footer_navigation: Navigation = [
 
 export const MainLayoutFooter: React.FunctionComponent = (_props: object) => {
 	const { t } = useTranslation();
-
-	const { loading, error, data } = useQuery<GetFooterDataQuery>(getFooterQueryDocument);
 
 	return (
 		<FelaComponent key="footer" as="footer" style={footer_styles}>
@@ -305,20 +310,6 @@ export const MainLayoutFooter: React.FunctionComponent = (_props: object) => {
 					</FelaComponent>
 				))}
 			</FelaComponent>
-
-			<div>
-				{!loading &&
-					!error &&
-					data &&
-					data.getFooterNavigation &&
-					data.getFooterNavigation.sections.map(section => {
-						return (
-							<span key={section.section_key}>
-								{section.headline_mlo_key && getMLOText(t, section.headline_mlo_key)}
-							</span>
-						);
-					})}
-			</div>
 
 			<FelaComponent as="div" style={{ textAlign: 'center', fontSize: '80%' }}>
 				<strong>{getMLOText(t, 'footer.price_info')}</strong>

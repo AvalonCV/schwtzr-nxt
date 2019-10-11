@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IRenderer } from 'fela';
-import { RendererProvider } from 'react-fela';
+import { RendererProvider, ThemeProvider } from 'react-fela';
 
 import * as i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
@@ -15,7 +15,7 @@ import { StaticRouterProps } from 'react-router';
 import { BrowserRouterProps } from 'react-router-dom';
 import { ScrollToTopOnRouteChange } from './components/elements/ScrollToTop';
 
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { /*Helmet,*/ HelmetProvider } from 'react-helmet-async';
 
 interface AppProps {
 	fela_renderer: IRenderer;
@@ -35,22 +35,24 @@ export class App extends React.PureComponent<AppProps, AppState> {
 		return (
 			<ApolloProvider client={this.props.apollo_client}>
 				<RendererProvider renderer={this.props.fela_renderer}>
-					<this.props.RouterComponent {...this.props.router_props}>
-						{/* tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945
+					<ThemeProvider theme={{ main_color: '#1d3c8d' }}>
+						<this.props.RouterComponent {...this.props.router_props}>
+							{/* tslint:disable-next-line: no-any (as long as https://github.com/i18next/react-i18next/pull/945
 							breaks this code (i18n 'only' has reportNamespaces as property)) */}
-						<I18nextProvider i18n={this.props.i18n}>
-							<HelmetProvider context={this.props.react_helmet_context}>
-								<Helmet>
-									<title>B2B Panda</title>
-									<meta name="description" content="Lé Content" />
-								</Helmet>
-								<ScrollToTopOnRouteChange />
-								<MainLayout>
-									<div>Hello &amp; Welcome....</div>
-								</MainLayout>
-							</HelmetProvider>
-						</I18nextProvider>
-					</this.props.RouterComponent>
+							<I18nextProvider i18n={this.props.i18n}>
+								<HelmetProvider context={this.props.react_helmet_context}>
+									{/* <Helmet>
+										<title>B2B Panda</title>
+										<meta name="description" content="Lé Content" />
+									</Helmet> */}
+									<ScrollToTopOnRouteChange />
+									<MainLayout>
+										<div>Hello &amp; Welcome....</div>
+									</MainLayout>
+								</HelmetProvider>
+							</I18nextProvider>
+						</this.props.RouterComponent>
+					</ThemeProvider>
 				</RendererProvider>
 			</ApolloProvider>
 		);

@@ -10,6 +10,7 @@ generates:
             - add: '// tslint:disable: no-any'
             - add: '// tslint:disable: max-line-length'
             - add: 'import { TranslationItemKey } from "../shared/localisation/translations";'
+            - add: 'import { FontAwesomeIconDefinition } from "fontawesome-webfont-react-fela";'
 
             - 'typescript'
             - 'typescript-operations'
@@ -19,6 +20,7 @@ generates:
             scalars:
                 Date: Date
                 MLOKey: TranslationItemKey
+                FontAwesomeIcon: FontAwesomeIconDefinition
     ./graphql.schema.json:
         plugins:
             - 'introspection'

@@ -1,0 +1,15 @@
+query getHeaderData {
+	getHeaderNavigation {
+		sections {
+			section_key,
+			headline_mlo_key,
+			description_mlo_key,
+			elements {
+				icon,
+				name_mlo_key,
+				description_mlo_key,
+				show_as_highlight
+			}
+		}
+	}
+}

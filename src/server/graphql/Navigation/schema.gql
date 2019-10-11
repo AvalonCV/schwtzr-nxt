@@ -20,7 +20,7 @@ type NavigationSection {
 }
 
 type NavigationSectionElement {
-	icon: String
+	icon: FontAwesomeIcon
 	show_as_highlight: Boolean
 	name_mlo_key: MLOKey
 	description_mlo_key: MLOKey

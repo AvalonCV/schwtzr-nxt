@@ -13,6 +13,9 @@ import { resolver as DateResolver } from './Date/resolver';
 import mlo_schema from './MLO/schema.gql';
 import { resolver as MLOResolver } from './MLO/resolver';
 
+import fa_icon_schema from './FontAwesomeIcon/schema.gql';
+import { resolver as FAIconResolver } from './FontAwesomeIcon/resolver';
+
 import navigation_schema from './Navigation/schema.gql';
 import { resolver as NavigationResolver } from './Navigation/resolver';
 
@@ -25,6 +28,7 @@ export const gql_document_nodes = [
 	link_schema,
 	date_schema,
 	mlo_schema,
+	fa_icon_schema,
 	image_schema,
 	document_schema,
 	navigation_schema,
@@ -35,6 +39,7 @@ export const gql_resolvers: IResolvers = merge(
 	{},
 	DateResolver,
 	MLOResolver,
+	FAIconResolver,
 	BookResolver,
 	NavigationResolver,
 	DocumentResolver

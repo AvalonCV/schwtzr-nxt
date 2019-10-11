@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 
 import { DocumentNode } from 'graphql';
 import { useQuery } from '@apollo/react-hooks';
@@ -20,7 +20,7 @@ interface QueryData<TQueryVariables> {
 }
 
 interface AsPageConfiguration<TQuery, TQueryVariables, TRouteParameters> {
-	getQueryData: (route_params: Partial<TRouteParameters>) => QueryData<TQueryVariables>;
+	getQueryData: (route_params: { [p in keyof TRouteParameters]: string }) => QueryData<TQueryVariables>;
 	getPageTitle: (data: TQuery) => string;
 	getMetaData?: (data: TQuery) => MetaData[];
 }
@@ -38,7 +38,7 @@ export function asPage<TQuery, TQueryVariables = {}, TRouteParameters = {}>(
 		// -> useParams<TRouteParameters> leads to
 		// Argument of type '{ [p in keyof TRouteParameters]: string; }' is not assignable to parameter of
 		// type 'Partial<TRouteParameters>'. Type 'string' is not assignable to type 'TRouteParameters[P] | undefined
-		const route_params = useParams();
+		const route_params = useParams<TRouteParameters>();
 		const { query, variables } = configuration.getQueryData(route_params);
 		const { loading, error, data } = useQuery<TQuery, TQueryVariables>(query, {
 			variables: variables
@@ -49,15 +49,15 @@ export function asPage<TQuery, TQueryVariables = {}, TRouteParameters = {}>(
 		} else if (error) {
 			return <div>Error: {error}</div>;
 		} else if (data) {
-			const meta_data = (configuration.getMetaData && configuration.getMetaData(data)) || [];
+			// const meta_data = (configuration.getMetaData && configuration.getMetaData(data)) || [];
 			return (
 				<React.Fragment>
-					<Helmet key="helmet_data">
+					{/* <Helmet key="helmet_data">
 						<title>{configuration.getPageTitle(data)}</title>
 						{meta_data.map(current => {
 							return <meta key={current.name} name={current.name} content={current.content} />;
 						})}
-					</Helmet>
+					</Helmet> */}
 					<PageComponent key="page_content" data={data} />
 				</React.Fragment>
 			);

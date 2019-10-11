@@ -1,10 +1,12 @@
 // tslint:disable: no-any
 // tslint:disable: max-line-length
 import { TranslationItemKey } from '../shared/localisation/translations';
+import { FontAwesomeIconDefinition } from 'fontawesome-webfont-react-fela';
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } &
 	{ [P in K]-?: NonNullable<T[P]> };
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
 	ID: string;
@@ -14,8 +16,8 @@ export type Scalars = {
 	Float: number;
 	/** Multilanguage-Object_Key */
 	MLOKey: TranslationItemKey;
-	/** Date custom scalar type */
-	Date: Date;
+	/** FontAwesomeIcon custom scalar type */
+	FontAwesomeIcon: FontAwesomeIconDefinition;
 	/** The `Upload` scalar type represents a file upload. */
 	Upload: any;
 };
@@ -80,7 +82,7 @@ export type NavigationSection = {
 
 export type NavigationSectionElement = {
 	__typename?: 'NavigationSectionElement';
-	icon?: Maybe<Scalars['String']>;
+	icon?: Maybe<Scalars['FontAwesomeIcon']>;
 	show_as_highlight?: Maybe<Scalars['Boolean']>;
 	name_mlo_key?: Maybe<Scalars['MLOKey']>;
 	description_mlo_key?: Maybe<Scalars['MLOKey']>;
@@ -143,6 +145,26 @@ export type GetFooterDataQueryVariables = {};
 
 export type GetFooterDataQuery = { __typename?: 'Query' } & {
 	getFooterNavigation: { __typename?: 'Footer' } & {
+		sections: Array<
+			{ __typename?: 'NavigationSection' } & Pick<
+				NavigationSection,
+				'section_key' | 'headline_mlo_key' | 'description_mlo_key'
+			> & {
+					elements: Array<
+						{ __typename?: 'NavigationSectionElement' } & Pick<
+							NavigationSectionElement,
+							'icon' | 'name_mlo_key' | 'description_mlo_key' | 'show_as_highlight'
+						>
+					>;
+				}
+		>;
+	};
+};
+
+export type GetHeaderDataQueryVariables = {};
+
+export type GetHeaderDataQuery = { __typename?: 'Query' } & {
+	getHeaderNavigation: { __typename?: 'Header' } & {
 		sections: Array<
 			{ __typename?: 'NavigationSection' } & Pick<
 				NavigationSection,
@@ -246,13 +268,13 @@ export type ResolversTypes = {
 	NavigationSection: ResolverTypeWrapper<NavigationSection>;
 	MLOKey: ResolverTypeWrapper<Scalars['MLOKey']>;
 	NavigationSectionElement: ResolverTypeWrapper<NavigationSectionElement>;
+	FontAwesomeIcon: ResolverTypeWrapper<Scalars['FontAwesomeIcon']>;
 	Footer: ResolverTypeWrapper<Footer>;
 	ID: ResolverTypeWrapper<Scalars['ID']>;
 	Book: ResolverTypeWrapper<Book>;
 	Mutation: ResolverTypeWrapper<{}>;
 	Subscription: ResolverTypeWrapper<{}>;
 	CacheControlScope: CacheControlScope;
-	Date: ResolverTypeWrapper<Scalars['Date']>;
 	Upload: ResolverTypeWrapper<Scalars['Upload']>;
 };
 
@@ -268,13 +290,13 @@ export type ResolversParentTypes = {
 	NavigationSection: NavigationSection;
 	MLOKey: Scalars['MLOKey'];
 	NavigationSectionElement: NavigationSectionElement;
+	FontAwesomeIcon: Scalars['FontAwesomeIcon'];
 	Footer: Footer;
 	ID: Scalars['ID'];
 	Book: Book;
 	Mutation: {};
 	Subscription: {};
 	CacheControlScope: CacheControlScope;
-	Date: Scalars['Date'];
 	Upload: Scalars['Upload'];
 };
 
@@ -301,10 +323,6 @@ export type BookResolvers<
 	categories?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
 };
 
-export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
-	name: 'Date';
-}
-
 export type DocumentResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['Document'] = ResolversParentTypes['Document']
@@ -313,6 +331,10 @@ export type DocumentResolvers<
 	teaser_image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType>;
 	markdown_content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
+
+export interface FontAwesomeIconScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['FontAwesomeIcon'], any> {
+	name: 'FontAwesomeIcon';
+}
 
 export type FooterResolvers<
 	ContextType = any,
@@ -364,7 +386,7 @@ export type NavigationSectionElementResolvers<
 	ContextType = any,
 	ParentType extends ResolversParentTypes['NavigationSectionElement'] = ResolversParentTypes['NavigationSectionElement']
 > = {
-	icon?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	icon?: Resolver<Maybe<ResolversTypes['FontAwesomeIcon']>, ParentType, ContextType>;
 	show_as_highlight?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
 	name_mlo_key?: Resolver<Maybe<ResolversTypes['MLOKey']>, ParentType, ContextType>;
 	description_mlo_key?: Resolver<Maybe<ResolversTypes['MLOKey']>, ParentType, ContextType>;
@@ -407,8 +429,8 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 
 export type Resolvers<ContextType = any> = {
 	Book?: BookResolvers<ContextType>;
-	Date?: GraphQLScalarType;
 	Document?: DocumentResolvers<ContextType>;
+	FontAwesomeIcon?: GraphQLScalarType;
 	Footer?: FooterResolvers<ContextType>;
 	Header?: HeaderResolvers<ContextType>;
 	Image?: ImageResolvers<ContextType>;
