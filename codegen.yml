@@ -1,0 +1,26 @@
+overwrite: true
+schema: 'http://localhost:3000/graphql'
+documents: 'src/**/*.gql'
+generates:
+    src/generated/graphql.tsx:
+        hooks:
+            afterOneFileWrite:
+                - npx prettier --write
+        plugins:
+            - add: '// tslint:disable: no-any'
+            - add: '// tslint:disable: max-line-length'
+            - add: 'import { TranslationItemKey } from "../shared/localisation/translations";'
+            - add: 'import { FontAwesomeIconDefinition } from "fontawesome-webfont-react-fela";'
+
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-resolvers'
+#            - 'typescript-react-apollo'
+        config:
+            scalars:
+                Date: Date
+                MLOKey: TranslationItemKey
+                FontAwesomeIcon: FontAwesomeIconDefinition
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'

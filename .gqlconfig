@@ -1,0 +1,6 @@
+// .gqlconfig (only schema)
+{
+	"schema": {
+		"files": "src/**/*.gql"
+	}
+}

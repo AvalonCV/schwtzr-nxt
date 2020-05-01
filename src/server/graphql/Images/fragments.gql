@@ -1,0 +1,7 @@
+fragment ImageProperties on Image {
+	src
+	height
+	width
+	alt
+	placeholder
+}

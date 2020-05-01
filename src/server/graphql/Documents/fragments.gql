@@ -1,0 +1,9 @@
+#import "./../Images/fragments.gql"
+
+fragment DocumentProperties on Document {
+	title
+	teaser_image {
+		...ImageProperties
+	}
+	markdown_content
+}

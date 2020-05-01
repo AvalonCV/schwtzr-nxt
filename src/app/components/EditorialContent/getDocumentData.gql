@@ -1,0 +1,7 @@
+#import "./../../../server/graphql/Documents/fragments.gql"
+
+query getDocumentData($identifier: String) {
+	getDocument(identifier: $identifier) {
+		...DocumentProperties
+	}
+}
