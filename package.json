@@ -24,7 +24,7 @@
 		"apollo-link-http": "^1.5.17",
 		"apollo-link-schema": "^1.2.5",
 		"apollo-server": "^2.13.1",
-		"apollo-server-express": "^2.13.1",
+		"apollo-server-express": "^2.14.2",
 		"compression": "^1.7.4",
 		"express": "^4.17.1",
 		"fela": "^11.3.0",
