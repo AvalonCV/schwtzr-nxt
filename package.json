@@ -33,7 +33,7 @@
 		"html-minifier": "^4.0.0",
 		"i18next": "^19.4.4",
 		"i18next-express-middleware": "^2.0.0",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
 		"react": "^16.13.1",
 		"react-apollo": "^3.1.5",
 		"react-dom": "^16.13.1",
