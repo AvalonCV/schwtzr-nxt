@@ -23,7 +23,7 @@
 		"apollo-client": "^2.6.9",
 		"apollo-link-http": "^1.5.17",
 		"apollo-link-schema": "^1.2.5",
-		"apollo-server": "^2.13.1",
+		"apollo-server": "^2.25.3",
 		"apollo-server-express": "^2.13.1",
 		"compression": "^1.7.4",
 		"express": "^4.17.1",
