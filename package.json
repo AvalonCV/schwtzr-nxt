@@ -26,7 +26,7 @@
 		"apollo-server": "^2.13.1",
 		"apollo-server-express": "^2.13.1",
 		"compression": "^1.7.4",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"fela": "^11.3.0",
 		"fontawesome-webfont-react-fela": "0.0.1",
 		"graphql": "^15.0.0",
